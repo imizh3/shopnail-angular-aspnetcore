@@ -1,0 +1,87 @@
+<div class="row" style="padding-top: 5px">
+  <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+    <nb-user [name]="product.tendaydu" [title]="product.masieuthi"> </nb-user>
+    <p
+      style="
+        margin-top: 2px;
+        margin-bottom: 0;
+        font-size: 0.82rem;
+        font-weight: 400;
+        color: red;
+        font-family: Open Sans, sans-serif;
+        font-style: italic;
+        line-height: 1rem;
+        margin-left: 0.5rem;
+      "
+    >
+      {{ dienGiaiKhuyenMai }}
+    </p>
+  </div>
+  <div class="col-12 col-md-6 col-sm-6 col-lg-6 col-xs-12">
+    <div class="row">
+      <div class="col-5 col-md-5 col-sm-5 col-xs-5">
+        <a class="text-danger"
+          >{{ product.giabanbuoncovat | number: "1.0" }} đ</a
+        >
+        <br />
+
+        <span>Tồn: {{ product.toncuoikysl | number: "1.0" }}</span>
+        <br />
+        <span>Quy cách: {{ product.quycach }}</span>
+      </div>
+      <div class="col-7 col-md-7 col-sm-7 col-xs-7">
+        <div class="field-soluong">
+          <input
+            nbInput
+            fullWidth
+            fieldSize="small"
+            #sothungid
+            placeholder="th"
+            type="number"
+            (blur)="setValueThung(sothungid.value)"
+            (keydown.enter)="sendTab($event)"
+            (keyup.enter)="setValueThung(sothungid.value)"
+            value="{{ sothung }}"
+          />
+          <span class="ngancach">/</span>
+          <input
+            nbInput
+            fullWidth
+            fieldSize="small"
+            #soleid
+            placeholder="le"
+            type="number"
+            (blur)="setValue(soleid.value)"
+            (keyup.enter)="setValue(soleid.value)"
+            value="{{ sole }}"
+          />
+        </div>
+
+        <div class="btn-addtocart">
+          <button
+            nbButton
+            fullWidth
+            size="small"
+            status="danger"
+            #btnAddtocart
+            (click)="AddToCart()"
+          >
+            <nb-icon [icon]="'cart-plus'" pack="fa"></nb-icon>
+            Đặt hàng
+          </button>
+          <button
+            nbButton
+            size="small"
+            status="warning"
+            #btnAddkmtocart
+            (click)="AddKmToCart()"
+            title="Thêm sp KM"
+          >
+            <nb-icon [icon]="'plus'" pack="fa"></nb-icon>
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

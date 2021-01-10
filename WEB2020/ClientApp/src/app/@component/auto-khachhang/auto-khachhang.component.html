@@ -1,0 +1,19 @@
+<input
+  [ngModel]="innerValue"
+  (ngModelChange)="onModelChange($event)"
+  nbInput
+  fullWidth
+  type="text"
+  [placeholder]="placeholder"
+  [nbAutocomplete]="auto"
+  class="form-control"
+/>
+
+<nb-autocomplete #auto [handleDisplayFn]="viewHandle">
+  <nb-option
+    *ngFor="let option of filteredControlOptions$ | async"
+    [value]="option"
+  >
+    {{ option.tenkhachhang + "-" + option.dienthoai + "-" + option.diachi }}
+  </nb-option>
+</nb-autocomplete>

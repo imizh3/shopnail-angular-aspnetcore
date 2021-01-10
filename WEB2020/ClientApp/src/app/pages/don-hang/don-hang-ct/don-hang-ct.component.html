@@ -1,0 +1,185 @@
+<nb-card>
+  <nb-card-header>
+    <div style="display: flex">
+      <div>Chi tiết đơn hàng</div>
+      <div style="color: red; margin-left: 5px">{{ magiaodichpk }}</div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="chi-tiet-don-hang">
+      <div class="div-ct1">
+        <div class="titles">
+          <p>Mã KH:</p>
+          <p>Tên KH:</p>
+          <p>SĐT KH:</p>
+        </div>
+        <div class="fields">
+          <input
+            nbInput
+            readonly
+            fieldSize="small"
+            placeholder=""
+            value="{{ khachHang.makhachhang }}"
+            fullWidth
+          />
+          <input
+            nbInput
+            readonly
+            fieldSize="small"
+            placeholder=""
+            value="{{ khachHang.tenkhachhang }}"
+            fullWidth
+          />
+          <input
+            nbInput
+            readonly
+            fieldSize="small"
+            placeholder=""
+            value="{{ khachHang.dienthoai }}"
+            fullWidth
+          />
+        </div>
+      </div>
+      <div class="div-ct2">
+        <div class="titles">
+          <p>Đ/c:</p>
+          <p>Đ/c nhận:</p>
+          <p>Ghi chú:</p>
+        </div>
+        <div class="fields">
+          <input
+            nbInput
+            fieldSize="small"
+            placeholder=""
+            [formControl]="txtDiachi"
+            fullWidth
+          />
+          <input
+            nbInput
+            fieldSize="small"
+            placeholder=""
+            [formControl]="txtDiachigiaohang"
+            fullWidth
+          />
+          <input
+            nbInput
+            fieldSize="small"
+            placeholder=""
+            [formControl]="txtGhichu"
+            fullWidth
+          />
+        </div>
+      </div>
+    </div>
+    <div class="div-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã SP</th>
+            <th>Tên SP</th>
+            <th>Thùng/Lẻ</th>
+            <th>SL</th>
+            <th>Giá xuất</th>
+            <th>Tiền hàng</th>
+            <th>%CK</th>
+            <th>Tiền CK</th>
+            <th>Tiền VAT</th>
+            <th>Thành tiền</th>
+            <th>#</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let giaodichct of giaodichcts; index as i">
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ giaodichct.masieuthi }}</td>
+            <td class="tensanpham">
+              {{ loadProductName(giaodichct.masieuthi) }}
+              <p class="txtKhuyenMai" *ngIf="giaodichct.iskhuyenmai">
+                Khuyến mại
+              </p>
+            </td>
+            <td>
+              <app-thung-le
+                [value]="giaodichct.sothung"
+                (onEditThungLe)="onEditThungLe(giaodichct, $event)"
+              ></app-thung-le>
+            </td>
+            <td class="soluong" style="min-width: 5rem">
+              <input
+                type="number"
+                (change)="onEditConfirm(giaodichct, $event)"
+                (keyup.enter)="onEditConfirm(giaodichct, $event)"
+                nbInput
+                min="0"
+                fullWidth
+                fieldSize="small"
+                [value]="giaodichct.soluong"
+              />
+            </td>
+            <td>{{ giaodichct.dongiachuavat | number: "1.0" }}</td>
+            <td>{{ giaodichct.tienhang | number: "1.0" }}</td>
+            <td style="min-width: 5rem">
+              <input
+                type="number"
+                nbInput
+                (change)="onEditTyleck(giaodichct, 'tyleck', $event)"
+                (keyup.enter)="onEditTyleck(giaodichct, 'tyleck', $event)"
+                fullWidth
+                min="0"
+                fieldSize="small"
+                [value]="giaodichct.tyleck | number: '1.0'"
+              />
+            </td>
+            <td style="min-width: 5rem">
+              <input
+                type="text"
+                nbInput
+                (change)="onEditTyleck(giaodichct, 'tienck', $event)"
+                (keyup.enter)="onEditTyleck(giaodichct, 'tienck', $event)"
+                fullWidth
+                min="0"
+                fieldSize="small"
+                [value]="giaodichct.tienck | number: '1.0'"
+              />
+            </td>
+            <td>{{ giaodichct.tienvat | number: "1.0" }}</td>
+            <td>{{ giaodichct.thanhtien | number: "1.0" }}</td>
+            <td>
+              <button nbButton ghost (click)="onDeleteConfirm(giaodichct)">
+                <nb-icon
+                  icon="trash-2-outline"
+                  [options]="{ animation: { type: 'zoom' } }"
+                >
+                </nb-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!isLuuThuc" class="div-button">
+      <div class="btn1">
+        <button class="btn-add" nbButton status="success" (click)="btnMuaThemClicked()">
+          Mua thêm <nb-icon icon="plus-circle-outline"></nb-icon>
+        </button>
+        <button
+          nbButton
+          status="danger"
+          (click)="btnDuyenKMClicked()"
+          class="btn-duyetKM"
+        >
+          Duyệt KM <nb-icon icon="gift-outline"></nb-icon>
+        </button>
+        <button
+          nbButton
+          status="primary"
+          (click)="btnLuuDonClicked()"
+          class="btn-luu"
+        >
+          Lưu đơn <nb-icon icon="save-outline"></nb-icon>
+        </button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

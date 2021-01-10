@@ -1,0 +1,13 @@
+<nb-card >
+  <nb-card-header>
+    Danh sách sản phẩm
+  </nb-card-header>
+  <nb-list nbInfiniteList
+           listenWindowScroll
+           [threshold]="500"
+           (bottomThreshold)="loadNext(firstCard)">
+    <nb-list-item *ngFor="let product of productlist">
+      <ngx-products-item [product]="product"></ngx-products-item>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

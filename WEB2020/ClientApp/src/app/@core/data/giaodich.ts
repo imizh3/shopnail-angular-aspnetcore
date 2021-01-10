@@ -1,0 +1,81 @@
+import { Giaodichct } from './giaodichct';
+import { Giaodichctkhuyenmai } from './giaodichctkhuyenmai';
+import { Khachhang } from './khachhang';
+export class Giaodich {
+  magiaodichpk: string;
+  madonvi: string;
+  maptnx: string;
+  ghichu: string;
+  trangthai: number;
+  ngaytao: Date;
+  sochungtugoc: string;
+  ngaychungtugoc: Date;
+  kemtheo: string;
+  tiendathanhtoan: number;
+  mahopdong: string;
+  ngaythanhtoan: Date;
+  ngayhoadon: Date;
+  sohoadon: string;
+  kyhieuhoadon: string;
+  magiaodichphu: string;
+  makhachhang: string;
+  diachigiaohang: string;
+  manhanviencongno: string;
+  manhanviendathang: string;
+  tendangnhap: string;
+  tendangnhapsua: string;
+  nguoigiaohang: string;
+  ngayphatsinh: Date;
+  maquay: string;
+  solaninhoadon: number;
+  trangthaidonhang: number;
+  mucdouutien: string;
+  mangoaite: string;
+  tygia: number;
+  trangthaick: number;
+  trangthaitinhdoanhso: number;
+  trangthaickthunglon: number;
+  mausohoadon: string;
+  giaodichct: Giaodichct[];
+  giaodichctkhuyenmai: Giaodichctkhuyenmai[];
+  khachhang: Khachhang;
+}
+export const giaodichFields = {
+  magiaodichpk: 'magiaodichpk',
+  madonvi: 'madonvi',
+  maptnx: 'maptnx',
+  ghichu: 'ghichu',
+  trangthai: 'trangthai',
+  ngaytao: 'ngaytao',
+  sochungtugoc: 'sochungtugoc',
+  ngaychungtugoc: 'ngaychungtugoc',
+  kemtheo: 'kemtheo',
+  tiendathanhtoan: 'tiendathanhtoan',
+  mahopdong: 'mahopdong',
+  ngaythanhtoan: 'ngaythanhtoan',
+  ngayhoadon: 'ngayhoadon',
+  sohoadon: 'sohoadon',
+  kyhieuhoadon: 'kyhieuhoadon',
+  magiaodichphu: 'magiaodichphu',
+  makhachhang: 'makhachhang',
+  diachigiaohang: 'diachigiaohang',
+  manhanviencongno: 'manhanviencongno',
+  manhanviendathang: 'manhanviendathang',
+  tendangnhap: 'tendangnhap',
+  tendangnhapsua: 'tendangnhapsua',
+  nguoigiaohang: 'nguoigiaohang',
+  ngayphatsinh: 'ngayphatsinh',
+  maquay: 'maquay',
+  solaninhoadon: 'solaninhoadon',
+  trangthaidonhang: 'trangthaidonhang',
+  mucdouutien: 'mucdouutien',
+  mangoaite: 'mangoaite',
+  tygia: 'tygia',
+  trangthaick: 'trangthaick',
+  trangthaitinhdoanhso: 'trangthaitinhdoanhso',
+  trangthaickthunglon: 'trangthaickthunglon',
+  mausohoadon: 'mausohoadon',
+  giaodichct: 'giaodichct',
+  giaodichctkhuyenmai: 'giaodichctkhuyenmai',
+  khachhang: 'khachhang',
+};

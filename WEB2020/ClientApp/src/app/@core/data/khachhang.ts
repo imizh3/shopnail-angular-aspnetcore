@@ -1,0 +1,30 @@
+export class Khachhang {
+  makhachhang: string;
+  maloaikhach: string;
+  madonvi: string;
+  manhomkhachhang: string;
+  tenkhachhang: string;
+  diachi: string;
+  dienthoai: string;
+  dienthoai2: string;
+  fax: string;
+  email: string;
+  masothue: string;
+  trangthai: number;
+  congnomax: number;
+  matuyen: string;
+  diachigiaohang: string;
+  nguoigiaodich: string;
+  diem: number;
+  doanhso: number;
+  mathe: string;
+  ngaytao: number;
+  ngaysinh: Date;
+  tendangnhap: string;
+  tendangnhapsua: string;
+  gioitinh: number;
+  madongbo: number;
+  motakhachhang: string;
+  songaythanhtoan: number;
+  loaicongno: number;
+}

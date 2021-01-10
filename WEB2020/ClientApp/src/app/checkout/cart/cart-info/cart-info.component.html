@@ -1,0 +1,89 @@
+<!-- <ng2-smart-table
+  class="cart-table"
+  [settings]="settings"
+  [source]="product$ | async"
+  (editConfirm)="onEditConfirm($event)"
+  (deleteConfirm)="onDeleteConfirm($event)"
+>
+</ng2-smart-table> -->
+<table class="table-cart">
+  <thead>
+    <tr>
+      <th>stt</th>
+      <th class="tensanpham">Tên sản phẩm</th>
+      <th class="soluong">Thùng/lẻ</th>
+      <th class="soluong">Số lượng</th>
+      <th>Đơn giá (đ)</th>
+      <th>Tiền hàng</th>
+      <th>Tỷ lệ ck</th>
+      <th>Tiền ck</th>
+      <th>Thành tiền (đ)</th>
+      <th>#</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of product$ | async; index as i">
+    <tr>
+      <td class="center">{{ i + 1 }}</td>
+
+      <td class="left tensanpham">
+        <!-- {{ item.tendaydu }} -->
+        <nb-user [name]="item.tendaydu" [title]="item.masieuthi"></nb-user>
+        <p class="txtKhuyenMai" *ngIf="item.iskhuyenmai">Khuyến mại</p>
+      </td>
+      <td class="soluongthung">
+        <app-thung-le
+          [value]="item.sothung"
+          (onEditThungLe)="onEditThungLe(item, $event)"
+        ></app-thung-le>
+      </td>
+      <td style="min-width: 5rem">
+        <input
+          type="number"
+          nbInput
+          min="0"
+          (change)="onEditConfirm(item, $event)"
+          (keyup.enter)="onEditConfirm(item, $event)"
+          fullWidth
+          fieldSize="small"
+          [value]="item.soluong"
+        />
+      </td>
+      <td class="right">{{ item.dongiachuavat | number: "1.0" }}</td>
+      <td class="right">{{ item.tienhang | number: "1.0" }}</td>
+      <td class="center" style="min-width: 5rem">
+        <input
+          type="number"
+          nbInput
+          min="0"
+          max="100"
+          (change)="onEditTyleck(item, 'tyleck', $event)"
+          (keyup.enter)="onEditTyleck(item, 'tyleck', $event)"
+          fullWidth
+          fieldSize="small"
+          [value]="item.tyleck | number: '1.0'"
+        />
+      </td>
+      <td class="right" style="min-width: 5rem">
+        <input
+          type="text"
+          nbInput
+          (change)="onEditTyleck(item, 'tienck', $event)"
+          (keyup.enter)="onEditTyleck(item, 'tienck', $event)"
+          fullWidth
+          fieldSize="small"
+          [value]="item.tienck | number: '1.0'"
+        />
+      </td>
+      <td class="right">{{ item.thanhtien | number }}</td>
+      <td>
+        <button nbButton ghost (click)="onDeleteConfirm(item)">
+          <nb-icon
+            icon="trash-2-outline"
+            [options]="{ animation: { type: 'zoom' } }"
+          >
+          </nb-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

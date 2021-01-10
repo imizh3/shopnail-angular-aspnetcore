@@ -1,0 +1,107 @@
+@import "../../../@theme/styles/themes";
+@include nb-install-component() {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+
+  input {
+    text-align: center;
+    padding: 0.1875rem 0.1875rem;
+  }
+  .input-soluongthung{
+    min-width: 5rem;
+    padding: 3px;
+  }
+  .soluongthung{
+    min-width:4rem
+  }
+  .tensanpham {
+    min-width: 11rem;
+  }
+  .field-soluong {
+    display: flex;
+  }
+  .ngancach {
+    margin: auto;
+  }
+  .table-cart {
+    display: table;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.85rem;
+
+    th,
+    td {
+      padding: 0.25rem 0.55rem;
+      vertical-align: top;
+      border: 1px solid nb-theme(border-basic-color-5);
+    }
+
+    thead > tr > th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody > tr > td {
+      vertical-align: middle;
+      padding: 0.25rem 0.55rem;
+    }
+
+    .tensanpham {
+      min-width: 11rem;
+    }
+
+    .soluong {
+      padding: 0%;
+      text-align: center;
+      min-width: 4rem;
+    }
+
+    .input-number {
+      text-align: center;
+      padding: 0%;
+    }
+    .txtKhuyenMai {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: red;
+      font-family: Open Sans, sans-serif;
+      font-style: italic;
+      line-height: 1rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  ::ng-deep .form-control {
+    background-color: nb-theme(background-basic-color-1);
+    border-color: nb-theme(background-basic-color-1);
+    color: nb-theme(input-basic-text-color);
+    font-size: 0.85rem;
+
+    &::placeholder {
+      color: nb-theme(input-basic-placeholder-text-color);
+    }
+
+    &:focus {
+      background-color: nb-theme(input-basic-focus-background-color);
+      border-color: nb-theme(input-basic-focus-border-color);
+    }
+    &:hover {
+      background-color: nb-theme(input-basic-hover-background-color);
+      border-color: nb-theme(input-basic-hover-border-color);
+    }
+
+    &:disabled {
+      background-color: nb-theme(input-basic-disabled-background-color);
+      border-color: nb-theme(input-basic-disabled-border-color);
+      color: nb-theme(input-basic-disabled-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-basic-disabled-placeholder-text-color);
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@mixin ngx-layout() {
+  @include media-breakpoint-down(is) {
+    body {
+        overflow:auto;
+    }
+
+    .row {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}

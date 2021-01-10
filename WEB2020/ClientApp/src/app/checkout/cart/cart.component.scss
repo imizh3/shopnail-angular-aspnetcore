@@ -1,0 +1,95 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../@theme/styles/themes";
+
+@include nb-install-component() {
+  .itemTomTat1 {
+    width: 40%;
+    margin: auto;
+  }
+  #chietKhau {
+    position: relative;
+  }
+  #chietKhau {
+    p {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+  .itemTomTat2 {
+    width: 60%;
+    text-align: right;
+    p {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    input {
+      width: 80px;
+    }
+  }
+  .rowTomTat {
+    display: flex;
+    justify-content: center;
+  }
+  #tongDon {
+    p {
+      color: red;
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+  }
+
+  .prev-button {
+    margin-right: 1rem;
+  }
+  .step-header-index {
+    width: fit-content;
+  }
+  .cart-container {
+    display: block;
+    width: 100vw;
+    overflow: auto;
+  }
+  .left-card {
+    width: 100%;
+  }
+  // .right-card {
+  //   width: 100%;
+  //   display: block;
+  // }
+  @include media-breakpoint-up(md) {
+    .left-card {
+      width: 72%;
+      float: left;
+    }
+    .right-card {
+      width: 27%;
+      float: right;
+    }
+  }
+
+  ::ng-deep .step-content {
+    padding: 0%;
+  }
+  ::ng-deep nb-user {
+    .user-picture.initials {
+      display: none;
+    }
+  }
+}
+
+:host {
+  display: flex;
+}
+
+nb-card.templateNoData {
+  flex: 1 1 45%;
+  margin: 0 0px;
+  text-align: center;
+  height: 90vh;
+
+  .div1 {
+    margin: auto;
+  }
+}

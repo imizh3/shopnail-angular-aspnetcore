@@ -1,0 +1,10 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  width: 100%;
+
+  input {
+    text-align: center;
+    min-width: 90px;
+  }
+}

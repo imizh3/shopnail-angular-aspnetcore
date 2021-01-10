@@ -1,0 +1,110 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js",
+          "/*"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "dmptnx",
+      "urls": [
+        "/api/getdata/dmptnx"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "dmvat",
+      "urls": [
+        "/api/getdata/dmvat"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "khachhangs",
+      "urls": [
+        "/api/getdata/khachhangs"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "thamsohethong",
+      "urls": [
+        "/api/getdata/thamsohethong"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "khuyenmai",
+      "urls": [
+        "/api/Order/khuyenmai"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "categorys",
+      "urls": [
+        "/api/categorys"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    },
+    {
+      "name": "products",
+      "urls": [
+        "/api/products"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "15m"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+@import "../../@theme/styles/themes";
+
+@include nb-install-component() {
+  display: flex;
+  width: 100%;
+  input {
+    text-align: center;
+    min-width: 4rem;
+    padding: 0.1875rem 0.1875rem;
+    margin: 0;
+  }
+  .ngancach {
+    margin: auto;
+  }
+}

@@ -1,0 +1,215 @@
+<div class="cart-container" *ngIf="hadData == true; else noData">
+  <nb-card class="left-card">
+    <nb-card-body>
+      <nb-stepper #stepper linear disableStepNavigation>
+        <nb-step class="step-header-idex" [stepControl]="firstForm">
+          <h6 class="center">Thông tin giỏ hàng</h6>
+          <ngx-cart-info></ngx-cart-info>
+          <br />
+          <button class="prev-button" nbButton (click)="btnDuyetkhuyenmai()">
+            Duyệt khuyến mại
+          </button>
+        </nb-step>
+        <nb-step [stepControl]="secondForm">
+          <h6 class="center">Thông tin khách hàng</h6>
+          <form
+            [formGroup]="secondForm"
+            (ngSubmit)="onSecondSubmit(stepper)"
+            class="step-container"
+          >
+            <p class="lorem">
+              Vui lòng nhập đầy đủ thông tin thanh toán của bạn vào các trường
+              dưới đây :
+            </p>
+            <br />
+            <div class="input-group">
+              <ngx-auto-khachhang
+                fullWidth
+                formControlName="tenkhachhang"
+                placeholder="Nhập họ tên"
+                (ngModelChange)="onChangeKhachHang($event)"
+                required
+              >
+              </ngx-auto-khachhang>
+            </div>
+
+            <ng-container *ngIf="tenkhachhang.invalid && (tenkhachhang.dirty || tenkhachhang.touched)">
+              <p
+                class="caption status-danger"
+                *ngIf="tenkhachhang.errors?.required"
+              >
+                Bạn chưa nhập tên khách hàng!
+              </p>
+            </ng-container>
+
+            <br />
+            <div class="input-group">
+              <input
+                id="dienthoai"
+                nbInput
+                fullWidth
+                type="text"
+                placeholder="Nhập số điện thoại"
+                class="form-control"
+                formControlName="dienthoai"
+                required
+              />
+            </div>
+
+            <ng-container *ngIf="dienthoai.invalid && (dienthoai.dirty || dienthoai.touched)">
+              <p
+                class="caption status-danger"
+                *ngIf="dienthoai.errors?.required"
+              >
+                Bạn chưa nhập số điện thoại!
+              </p>
+              <p
+                class="caption status-danger"
+                *ngIf="dienthoai.errors?.minlength"
+              >
+                Số điện thoại tối thiểu 10 ký tự!
+              </p>
+              <p
+                class="caption status-danger"
+                *ngIf="dienthoai.errors?.pattern"
+              >
+                Số điện thoại không dúng!
+              </p>
+            </ng-container>
+            <br />
+            <div class="input-group">
+              <input
+                nbInput
+                fullWidth
+                type="text"
+                placeholder="Nhập địa chỉ"
+                class="form-control"
+                formControlName="diachigiaohang"
+                required
+              />
+            </div>
+
+            <ng-container
+              *ngIf="diachigiaohang.invalid && diachigiaohang.touched"
+            >
+              <p
+                class="caption status-danger"
+                *ngIf="diachigiaohang.errors?.required"
+              >
+                Bạn chưa nhập địa chỉ giao hàng
+              </p>
+            </ng-container>
+            <br />
+            <div class="input-group">
+              <textarea
+                nbInput
+                fullWidth
+                formControlName="ghichu"
+                placeholder="Ghi chú"
+              ></textarea>
+            </div>
+            <br />
+            <button
+              class="prev-button"
+              #btnBack
+              nbButton
+              nbStepperPrevious
+              (click)="btnBackClicked(btnBack)"
+            >
+              Trở lại
+            </button>
+          </form>
+        </nb-step>
+
+        <nb-step [stepControl]="thirdForm">
+          <div class="step-container">
+            <h3>Thành công!</h3>
+            <button nbButton routerLink="/Home">Tiếp tục mua sắm</button>
+          </div>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+  <div class="right-card">
+    <nb-card class="card-tom-tat">
+      <nb-card-header id="card-header">Tóm tắt đơn hàng</nb-card-header>
+      <nb-card-body id="card-body">
+        <div>
+          <div class="rowTomTat">
+            <div class="itemTomTat1">
+              <p>Tổng tiền hàng:</p>
+            </div>
+            <div class="itemTomTat2">
+              <p>{{ tongTienHang | number: "1.0" }} đ</p>
+            </div>
+          </div>
+          <div class="rowTomTat">
+            <div class="itemTomTat1">
+              <p>Tiền chiết khấu:</p>
+            </div>
+            <div class="itemTomTat2">
+              <p>{{ tienChietKhau + tongCkTrenDon | number: "1.0" }} đ</p>
+            </div>
+          </div>
+          <div class="rowTomTat">
+            <div class="itemTomTat1" id="chietKhau">
+              <p>CK trên đơn:</p>
+            </div>
+            <div class="itemTomTat2">
+              <input
+                nbInput
+                #ck
+                fullWidth
+                fieldSize="small"
+                placeholder="0"
+                type="number"
+                value="{{ this.chietKhau }}"
+                (keyup.enter)="updateCk(ck.value)"
+                (blur)="updateCk(ck.value)"
+                (keyup)="updateCk(ck.value)"
+              />
+              %
+            </div>
+          </div>
+          <hr size="100%" />
+          <div class="rowTomTat" id="tongDon">
+            <div class="itemTomTat1">
+              <p>Tổng đơn:</p>
+            </div>
+            <div class="itemTomTat2">
+              <p>{{ tongDon | number: "1.0" }} đ</p>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+    <button
+      class="btnThanhToan"
+      nbButton
+      fullWidth
+      status="danger"
+      size="large"
+      (click)="btnMuaSamClicked(stepper)"
+    >
+      {{ txtChotDon }} <nb-icon icon="shopping-cart-outline"></nb-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #noData>
+  <nb-card class="templateNoData">
+    <div class="div1">
+      <p>Không có sản phẩm nào trong giỏ hàng</p>
+      <br />
+      <button
+        nbButton
+        status="info"
+        routerLink="\Home"
+        style="align-content: center"
+        status="primary"
+      >
+        Tiếp tục mua sắm
+      </button>
+    </div>
+  </nb-card>
+</ng-template>

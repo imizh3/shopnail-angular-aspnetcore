@@ -1,0 +1,120 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../@theme/styles/themes";
+@include nb-install-component() {
+  .btn-filter-mobile {
+    visibility: hidden;
+  }
+  .div-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table {
+    display: table;
+    width: 100%;
+
+    font-size: 0.85rem;
+
+    th,
+    td {
+      padding: 0.25rem 0.55rem;
+      vertical-align: top;
+      border: 1px solid nb-theme(border-basic-color-5);
+    }
+
+    thead > tr > th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody > tr > td {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+
+  .loc {
+    display: flex;
+    width: 100%;
+  }
+  .loc-field {
+    display: flex;
+    margin: 0.5rem;
+    p {
+      margin: auto;
+    }
+    input {
+      margin-left: 0.5rem;
+    }
+  }
+  td.ma-giao-dich:hover {
+    color: red;
+    cursor: pointer;
+  }
+  ::ng-deep nb-select {
+    margin-left: 0.5rem;
+  }
+
+  ::ng-deep .form-control {
+    background-color: nb-theme(background-basic-color-1);
+    border-color: nb-theme(background-basic-color-1);
+    color: nb-theme(input-basic-text-color);
+    font-size: 0.85rem;
+
+    &::placeholder {
+      color: nb-theme(input-basic-placeholder-text-color);
+    }
+
+    &:focus {
+      background-color: nb-theme(input-basic-focus-background-color);
+      border-color: nb-theme(input-basic-focus-border-color);
+    }
+    &:hover {
+      background-color: nb-theme(input-basic-hover-background-color);
+      border-color: nb-theme(input-basic-hover-border-color);
+    }
+
+    &:disabled {
+      background-color: nb-theme(input-basic-disabled-background-color);
+      border-color: nb-theme(input-basic-disabled-border-color);
+      color: nb-theme(input-basic-disabled-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-basic-disabled-placeholder-text-color);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    ::ng-deep nb-card-header {
+      padding: 0.5rem 0.7rem;
+    }
+
+    ::ng-deep nb-card-body {
+      padding: 0.5rem 0.7rem;
+    }
+    .loc-field {
+      margin: 0rem 0.5rem 0.5rem 0;
+    }
+    .title {
+      display: none;
+    }
+    ::ng-deep [nbInput].size-medium {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 2rem;
+      padding: 0rem 0.2rem;
+      max-width: 10rem;
+      height: fit-content;
+    }
+    .loc {
+      display: none;
+    }
+    .btn-filter-mobile {
+      visibility: visible;
+    }
+    td.ma-giao-dich:active {
+      color: red;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-header> Chương trình khuyến mại</nb-card-header>
+  <nb-card-body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>stt</th>
+        <th>Tên chương trình</th>
+        <th>Loại áp dụng</th>
+        <th>Loại chương trình</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+      </tr>
+    </thead>
+    <tbody *ngFor=" let item of chuongtrinhkm; index as i">
+      <tr>
+        <td>{{i+1}}</td>
+        <td><nb-user [name]="item.tenchuongtrinh" [title]="item.machuongtrinh"[showInitials]= false (click)="btnChiTietKhuyenMai(item.machuongtrinh)"></nb-user></td>
+        <td>{{item.loaiapdung}}</td>
+        <td>{{item.maloaichuongtrinh}}</td>
+        <td>{{item.ngaybatdau | date :'dd/MM/yyyy'}}</td>
+        <td>{{item.ngayketthuc | date :'dd/MM/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</nb-card-body>
+</nb-card>

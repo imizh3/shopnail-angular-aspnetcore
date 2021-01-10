@@ -1,0 +1,25 @@
+<input
+  class="input-soluong"
+  nbInput
+  fullWidth
+  #thung
+  min="0"
+  fieldSize="small"
+  placeholder="th"
+  type="number"
+  [value]="value | thungLePipe: 'thung'"
+  (change)="onThungLe($event)"
+/>
+<span class="ngancach">/</span>
+<input
+  class="input-soluong"
+  nbInput
+  fullWidth
+  min="0"
+  #le
+  fieldSize="small"
+  placeholder="le"
+  type="number"
+  [value]="value | thungLePipe: 'le'"
+  (change)="onThungLe($event)"
+/>

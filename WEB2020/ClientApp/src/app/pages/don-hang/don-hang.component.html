@@ -1,0 +1,146 @@
+<nb-card>
+  <nb-card-header>
+    <div style="display: inline">
+      Danh sách đơn hàng
+      <button
+        class="btn-filter-mobile"
+        [nbPopover]="templateRef"
+        nbButton
+        nbPopoverPlacement="bottom"
+        size="small"
+        style="float: right"
+      >
+        Lọc<nb-icon icon="funnel-outline"></nb-icon>
+      </button>
+    </div>
+    <ng-template #templateRef>
+      <div style="padding: 1rem; width: 50vw">
+        <p style="margin-bottom: 0.5rem">Từ ngày:</p>
+        <input
+          type="date"
+          nbInput
+          [(ngModel)]="tuNgayDate"
+          fieldSize="small"
+          fullWidth
+        />
+        <p style="margin-bottom: 0.5rem">Đến ngày:</p>
+        <input
+          type="date"
+          nbInput
+          [(ngModel)]="denNgayDate"
+          fieldSize="small"
+          fullWidth
+        />
+        <p style="margin-bottom: 0.5rem">Trạng thái:</p>
+        <nb-select
+          placeholder="Trạng thái"
+          [(selected)]="trangThai"
+          size="small"
+          style="margin-bottom: 0.5rem"
+        >
+          <nb-option value="1">1</nb-option>
+          <nb-option value="10">10</nb-option>
+        </nb-select>
+        <button nbButton (click)="btnLocClicked()" size="small" fullWidth>
+          Lọc<nb-icon icon="funnel-outline"></nb-icon>
+        </button>
+      </div>
+    </ng-template>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="loc">
+      <div class="loc-field">
+        <p class="title">Từ ngày:</p>
+        <input type="date" nbInput [(ngModel)]="tuNgayDate" />
+      </div>
+      <div class="loc-field">
+        <p class="title">Đến ngày:</p>
+        <input type="date" nbInput [(ngModel)]="denNgayDate" />
+      </div>
+      <div class="loc-field">
+        <p class="title">Trạng thái:</p>
+        <nb-select placeholder="Trạng thái" [(selected)]="trangThai">
+          <nb-option value="1">1</nb-option>
+          <nb-option value="10">10</nb-option>
+        </nb-select>
+      </div>
+      <button nbButton (click)="btnLocClicked()" style="margin: 0.5rem">
+        Lọc
+      </button>
+    </div>
+    <div
+      class="div-table"
+      *ngIf="giaodichs$; else noData"
+      [nbSpinner]="isLoading"
+      nbSpinnerStatus="primary"
+    >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Khách hàng</th>
+            <th>TT</th>
+            <th>Ngày đặt</th>
+            <th>Tiền hàng</th>
+            <th>Tiền CK</th>
+            <th>Tiền CK trên đơn</th>
+            <th>Tổng tiền</th>
+            <th>#</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let giaodich of giaodichs$; index as i">
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td
+              class="ma-giao-dich"
+              (click)="btnChiTietDonHangClicked(giaodich.magiaodichpk)"
+            >
+              {{ giaodich.magiaodichpk }}
+            </td>
+            <td>{{ loadTenKhachHang(giaodich.makhachhang) }}</td>
+            <td>{{ giaodich.trangthai }}</td>
+            <td>{{ giaodich.ngayphatsinh | date: "dd/MM/yyyy" }}</td>
+            <td>{{ giaodich.tienhang | number: "1.0" }}</td>
+            <td>{{ giaodich.tienck | number: "1.0" }}</td>
+            <td>{{ giaodich.tiencktrendon | number: "1.0" }}</td>
+            <td>
+              {{ giaodich.thanhtien | number: "1.0" }}
+            </td>
+            <td>
+              <button
+                nbButton
+                ghost
+                (click)="onDeleteConfirm(giaodich.magiaodichpk)"
+              >
+                <nb-icon
+                  icon="trash-2-outline"
+                  [options]="{ animation: { type: 'zoom' } }"
+                >
+                </nb-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot style="text-align: center">
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-weight: bold">Tổng :</td>
+            <td>{{ tongTienHang | number: "1.0" }}</td>
+            <td>{{ tongTienCK | number: "1.0" }}</td>
+            <td>{{ tongTienCkTrenDon | number: "1.0" }}</td>
+            <td>{{ tongThanhTien | number: "1.0" }}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #noData>
+  <p>Không có đơn hàng nào !</p>
+</ng-template>

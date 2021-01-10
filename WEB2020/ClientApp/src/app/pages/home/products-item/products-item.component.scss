@@ -1,0 +1,22 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  width: 100%;
+
+  input {
+    text-align: center;
+    padding: 0.1875rem 0.1875rem;
+  }
+
+  .btn-addtocart {
+    margin-top: 0.5rem;
+    display: flex;
+  }
+
+  .field-soluong{
+    display: flex;
+  }
+    .ngancach{
+      margin: auto;
+    }
+}

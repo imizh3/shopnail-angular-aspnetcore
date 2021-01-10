@@ -1,0 +1,13 @@
+<nb-card>
+    <nb-card-header> Chi tiết khuyến mại</nb-card-header>
+    <nb-card-body> 
+        <div class="card-chi-tiet-khuyen-mai">
+            
+            <nb-card *ngFor="let kmct of khuyenMaiCts">
+                 <ngx-products-item [product]="getProductById(kmct.masieuthiban)" [dienGiaiKhuyenMai]="loadDienGiaiKhuyenMai(kmct.masieuthiban)"></ngx-products-item> 
+                
+            </nb-card>
+
+        </div>
+    </nb-card-body>
+</nb-card>

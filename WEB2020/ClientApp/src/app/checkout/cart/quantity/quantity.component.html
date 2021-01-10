@@ -1,0 +1,13 @@
+<nb-form-field class="field-soluong">
+    <input nbInput fullWidth fieldSize="small" #soluongip type="number" (blur)="onModelChange(soluongip.value)" (keyup.enter)="onModelChange(soluongip.value)" value="{{rowData.soluong}}">
+    <button nbPrefix small status="warning" size="small" nbButton ghost (click)="giamSoluong()">
+      <nb-icon [icon]="'minus-outline'"
+               pack="eva">
+      </nb-icon>
+    </button>
+    <button nbSuffix small nbButton size="small" status="success" ghost (click)="tangSoluong()">
+      <nb-icon [icon]="'plus-outline'"
+               pack="eva">
+      </nb-icon>
+    </button>
+  </nb-form-field>

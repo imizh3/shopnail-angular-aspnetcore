@@ -1,0 +1,41 @@
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="input-group">
+      <p>Tên sản phẩm:</p>
+      <ngx-auto-sanpham
+        fullWidth
+        formControlName="tenSPControl"
+        placeholder="Nhập tên sản phẩm"
+        (ngModelChange)="onChangeSanPham($event)"
+        [ngClass]="{
+          'form-control-danger': form.invalid && (form.dirty || form.touched)
+        }"
+      >
+      </ngx-auto-sanpham>
+    </div>
+
+    <div class="input-group">
+      <p>Đơn giá:</p>
+      <input
+        nbInput
+        fullWidth
+        type="number"
+        class="form-control"
+        formControlName="donGiaControl"
+        disabled
+      />
+    </div>
+    <div style="display: block;">
+      <p>Số lượng:</p>
+      <input
+        fullWidth
+        type="number"
+        class="form-control"
+        formControlName="soluongControl"
+      />
+    </div>
+    <br>
+    <button type="button" nbButton (click)="addItemKmToOrder()" status="danger" style="float: left">Thêm KM</button>
+    <button type="submit" nbButton status="success" style="float: right">Thêm</button>
+  </form>
+

@@ -1,0 +1,76 @@
+@import "../../@theme/styles/themes";
+@include nb-install-component() {
+  .table {
+    display: table;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.85rem;
+
+    th,
+    td {
+      padding: 0.25rem 0.55rem;
+      vertical-align: top;
+      border: 1px solid nb-theme(border-basic-color-5);
+    }
+
+    thead > tr > th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody > tr > td {
+      vertical-align: middle;
+      text-align: center;
+    }
+    ::ng-deep nb-user .info-container:hover {
+      .user-name.ng-star-inserted {
+        color: red;
+      }
+      .user-title.ng-star-inserted {
+        color: red;
+        text-align: left;
+      }
+      cursor: pointer
+    }
+    ::ng-deep nb-user .info-container {  
+      .user-title.ng-star-inserted {    
+        text-align: left;
+      }   
+    }
+
+    ::ng-deep nb-user .user-picture.initials {
+      display: none;
+    }
+  }
+
+  ::ng-deep .form-control {
+    background-color: nb-theme(background-basic-color-1);
+    border-color: nb-theme(background-basic-color-1);
+    color: nb-theme(input-basic-text-color);
+    font-size: 0.85rem;
+
+    &::placeholder {
+      color: nb-theme(input-basic-placeholder-text-color);
+    }
+
+    &:focus {
+      background-color: nb-theme(input-basic-focus-background-color);
+      border-color: nb-theme(input-basic-focus-border-color);
+    }
+    &:hover {
+      background-color: nb-theme(input-basic-hover-background-color);
+      border-color: nb-theme(input-basic-hover-border-color);
+    }
+
+    &:disabled {
+      background-color: nb-theme(input-basic-disabled-background-color);
+      border-color: nb-theme(input-basic-disabled-border-color);
+      color: nb-theme(input-basic-disabled-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-basic-disabled-placeholder-text-color);
+      }
+    }
+  }
+}
