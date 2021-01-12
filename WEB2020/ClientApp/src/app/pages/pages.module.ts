@@ -33,6 +33,8 @@ import {NbMomentDateModule} from '@nebular/moment'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DonHangCtComponent } from './don-hang/don-hang-ct/don-hang-ct.component';
 import { ThemDonHangCtComponent } from './don-hang/them-don-hang-ct/them-don-hang-ct.component';
+import { QuanTriComponent } from './quan-tri/quan-tri.component';
+import { ThongKeComponent } from './thong-ke/thong-ke.component';
 
 @NgModule({
   imports: [
@@ -68,6 +70,8 @@ import { ThemDonHangCtComponent } from './don-hang/them-don-hang-ct/them-don-han
     DonHangComponent,
     DonHangCtComponent,
     ThemDonHangCtComponent,
+    QuanTriComponent,
+    ThongKeComponent,
   ],
   providers: [
     ProductsResolver,

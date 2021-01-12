@@ -22,7 +22,7 @@ namespace WEB2020.Data
         {
             string Manhanvien = user.FindFirst("Manhanvien").Value;
             IEnumerable<Nganhnhom> nganhnhoms = categorysManage.getCategory(Manhanvien);
-            DataTable dataMathang = DB.Getdata_VTHH_MATHANG(DB.XNT_TABLENAME(DateTime.Now), this.Madonvi, this.DataBaseXnt, 1);
+            DataTable dataMathang = DB.Getdata_VTHH_MATHANG(DB.XNT_TABLENAME(DateTime.Parse("08/01/2021")), this.Madonvi, this.DataBaseXnt, 1);
             dataMathang = (from mh in dataMathang.AsEnumerable()
                            join pq in nganhnhoms on mh["Manhomhang"] equals pq.Ma
                            select (mh)

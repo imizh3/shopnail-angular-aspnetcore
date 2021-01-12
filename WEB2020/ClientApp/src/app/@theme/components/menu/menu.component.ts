@@ -19,21 +19,26 @@ import { ProductActions } from "../../../@store/actions/product-actions";
 export class MenuComponent implements OnInit, OnDestroy {
   menuFormDb: Observable<any>;
   menuItems: NbMenuItem[] = [
-    {
-      title: "Home",
-      icon: "home-outline",
-      link: "/Home",
-      home: true,
-    },
-    {
-      title: "CT Khuyến mại",
-      icon: "gift-outline",
-      link: "/Khuyen-mai",
-    },
+    // {
+    //   title: "Bán hàng",
+    //   icon: "home-outline",
+    //   link: "/Home",
+    //   home: true,
+    // },
     {
       title: "Đơn hàng",
       icon: "file-text-outline",
       link: "/Don-hang",
+    },
+    {
+      title: "Quản trị",
+      icon: "shield-outline",
+      link: "/Quan-tri",
+    },
+    {
+      title: "Thống kê",
+      icon: "pie-chart-outline",
+      link: "/Thong-ke",
     },
   ];
 
@@ -81,9 +86,15 @@ export class MenuComponent implements OnInit, OnDestroy {
             )
           )
           .subscribe((d) => {
+            var banhangitem = {
+              title: "Bán hàng",
+              icon: "home-outline",
+              link: "/Home",
+              children: d,
+            };
             if (!isLoaded) {
-              console.log(d);
-              this.menuService.addItems(d, "menu");
+              //this.menuService.addItems(d, "menu");
+              this.menuItems.push(banhangitem);
               this.store.dispatch(this.productAction.setIsloadedCategory(true));
             }
           });

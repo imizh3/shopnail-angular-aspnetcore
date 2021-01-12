@@ -14,7 +14,7 @@
         [icon]="(materialTheme$ | async) ? 'menu-outline' : 'menu-2-outline'"
       ></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">WEB-<span>2020</span></a>
+    <a class="logo" href="#" (click)="navigateHome()"><span>Nailsdep</span></a>
   </div>
   <nb-select
     status="primary"
@@ -35,11 +35,15 @@
   <nb-actions size="small">
     <nb-action class="button-action">
       <nb-form-field>
-        <input class="searchInput"nbInput #searchInput placeholder="Tìm kiếm ..." (keyup.enter)="search( searchInput.value)">
-        <button nbSuffix nbButton ghost (click)="search( searchInput.value)">
-          <nb-icon icon="search-outline"
-                   >
-          </nb-icon>
+        <input
+          class="searchInput"
+          nbInput
+          #searchInput
+          placeholder="Tìm kiếm ..."
+          (keyup.enter)="search(searchInput.value)"
+        />
+        <button nbSuffix nbButton ghost (click)="search(searchInput.value)">
+          <nb-icon icon="search-outline"> </nb-icon>
         </button>
       </nb-form-field>
     </nb-action>

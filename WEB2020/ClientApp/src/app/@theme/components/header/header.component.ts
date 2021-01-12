@@ -68,11 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = "default";
 
-  userMenu = [
-    { title: "Báo cáo" },
-    { title: "Thông tin" },
-    { title: "Đăng xuất" },
-  ];
+  userMenu = [{ title: "Cá nhân" }, { title: "Đăng xuất" }];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -148,6 +144,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (d.item.title === "Báo cáo") {
           this.openBaoCao();
         }
+        if (d.item.title === "Cá nhân") {
+          this.openCaNhan();
+        }
       }
       if (d.tag === "menu" && this.userPictureOnly) {
         this.toggleSidebar();
@@ -203,4 +202,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   openBaoCao() {
     this.router.navigate(["/Report/bao-cao"]);
   }
+  openCaNhan() {}
 }

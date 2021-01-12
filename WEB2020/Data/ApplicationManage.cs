@@ -23,6 +23,8 @@ namespace WEB2020.Data
             giaodichManage = new GiaodichManage(configuration, _db);
             baocaoManage = new BaocaoManage(configuration, _db);
             db = _db;
+            Ngayphatsinh ngayphatsinh = db.Ngayphatsinh.Where(d => d.Madonvi == this.Madonvi && d.Trangthai == 1).FirstOrDefault();
+            PublicValue.ngayPhatSinh = ngayphatsinh != null ? ngayphatsinh.Ngayphatsinh1 : DateTime.Now;
         }
 
         public List<Dmptnx> getDmptnx()
