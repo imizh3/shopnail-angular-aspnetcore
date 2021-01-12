@@ -72,21 +72,21 @@ namespace WEB2020.Controllers
         //     return Ok(new { message = "Token revoked" });
         // }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAll")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(string id)
-        {
-            var user = _userService.GetById(id);
-            if (user == null) return NotFound();
+        // [HttpGet("{id}")]
+        // public IActionResult GetById(string id)
+        // {
+        //     var user = _userService.GetById(id);
+        //     if (user == null) return NotFound();
 
-            return Ok(user);
-        }
+        //     return Ok(user);
+        // }
 
         // [HttpGet("{id}/refresh-tokens")]
         // public IActionResult GetRefreshTokens(string id)

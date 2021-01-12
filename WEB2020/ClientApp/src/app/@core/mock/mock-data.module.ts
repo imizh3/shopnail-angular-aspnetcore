@@ -1,3 +1,4 @@
+import { NguoidungService } from "./nguoidung.service";
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -15,6 +16,7 @@ const SERVICES = [
   CartService,
   DataService,
   ReportService,
+  NguoidungService,
 ];
 
 @NgModule({

@@ -28,6 +28,8 @@ namespace WEB2020.Data
         private readonly ApplicationManage _appSettings;
         private readonly IConfiguration _config;
 
+        public string Madonvi = "";
+
         public UserService(
             MARTContext context,
             ApplicationManage configuration,
@@ -36,6 +38,7 @@ namespace WEB2020.Data
             _context = context;
             _appSettings = configuration;
             _config = config;
+            this.Madonvi = _config.GetValue<string>("Madonvi");
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
@@ -113,7 +116,7 @@ namespace WEB2020.Data
 
         public Nguoidung GetById(string id)
         {
-            return _context.Nguoidung.Find(id);
+            return _context.Nguoidung.Find(id, this.Madonvi);
         }
 
         // helper methods

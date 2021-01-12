@@ -5,10 +5,10 @@
         <nb-step class="step-header-idex" [stepControl]="firstForm">
           <h6 class="center">Thông tin giỏ hàng</h6>
           <ngx-cart-info></ngx-cart-info>
-          <br />
+          <!-- <br />
           <button class="prev-button" nbButton (click)="btnDuyetkhuyenmai()">
             Duyệt khuyến mại
-          </button>
+          </button> -->
         </nb-step>
         <nb-step [stepControl]="secondForm">
           <h6 class="center">Thông tin khách hàng</h6>
@@ -33,7 +33,12 @@
               </ngx-auto-khachhang>
             </div>
 
-            <ng-container *ngIf="tenkhachhang.invalid && (tenkhachhang.dirty || tenkhachhang.touched)">
+            <ng-container
+              *ngIf="
+                tenkhachhang.invalid &&
+                (tenkhachhang.dirty || tenkhachhang.touched)
+              "
+            >
               <p
                 class="caption status-danger"
                 *ngIf="tenkhachhang.errors?.required"
@@ -56,7 +61,11 @@
               />
             </div>
 
-            <ng-container *ngIf="dienthoai.invalid && (dienthoai.dirty || dienthoai.touched)">
+            <ng-container
+              *ngIf="
+                dienthoai.invalid && (dienthoai.dirty || dienthoai.touched)
+              "
+            >
               <p
                 class="caption status-danger"
                 *ngIf="dienthoai.errors?.required"
@@ -120,7 +129,19 @@
             </button>
           </form>
         </nb-step>
-
+        <nb-step [stepControl]="fouthForm">
+          <div class="step-container">
+            <h6 class="center">Thông tin thanh toán, vận chuyển</h6>
+            <button
+              class="prev-button"
+              nbButton
+              nbStepperPrevious
+              (click)="btnBackClicked()"
+            >
+              Trở lại
+            </button>
+          </div>
+        </nb-step>
         <nb-step [stepControl]="thirdForm">
           <div class="step-container">
             <h3>Thành công!</h3>
@@ -152,6 +173,14 @@
             </div>
           </div>
           <div class="rowTomTat">
+            <div class="itemTomTat1">
+              <p>Phí ship:</p>
+            </div>
+            <div class="itemTomTat2">
+              <p>0 đ</p>
+            </div>
+          </div>
+          <!-- <div class="rowTomTat">
             <div class="itemTomTat1" id="chietKhau">
               <p>CK trên đơn:</p>
             </div>
@@ -170,7 +199,7 @@
               />
               %
             </div>
-          </div>
+          </div> -->
           <hr size="100%" />
           <div class="rowTomTat" id="tongDon">
             <div class="itemTomTat1">
@@ -191,7 +220,7 @@
       size="large"
       (click)="btnMuaSamClicked(stepper)"
     >
-      {{ txtChotDon }} <nb-icon icon="shopping-cart-outline"></nb-icon>
+      {{ txtChotDon }} <nb-icon [icon]="txtIcon"></nb-icon>
     </button>
   </div>
 </div>

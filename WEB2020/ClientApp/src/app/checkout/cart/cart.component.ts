@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
+  fouthForm: FormGroup;
   product$: Observable<Giaodichct[]>;
   tongSoLuong: number;
   tongTienHang: number;
@@ -30,6 +31,7 @@ export class CartComponent implements OnInit {
   chietKhau: number;
   tienChietKhau: number;
   txtChotDon: string;
+  txtIcon: string;
   sdt: number;
   constructor(
     private fb: FormBuilder,
@@ -40,7 +42,8 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.txtChotDon = "Xác nhận";
+    this.txtChotDon = "Tiếp theo";
+    this.txtIcon = "arrow-circle-right-outline";
     this.hadData = this.isHadData();
     this.secondForm = this.fb.group({
       tenkhachhang: ["", Validators.required],
@@ -80,40 +83,44 @@ export class CartComponent implements OnInit {
     this.hadData = this.isHadData();
     if (this.isHadData()) {
       stepper.next();
-      this.txtChotDon = "Chốt Đơn";
     } else {
       this.hadData = this.isHadData();
     }
   }
+  onSecondStepNext(stepper) {
+    stepper.next();
+    this.txtChotDon = "Chốt Đơn";
+    this.txtIcon = "shopping-cart-outline";
+  }
   onSecondSubmit(stepper) {
-    // if (typeof this.secondForm.value.tenkhachhang === 'string') {
-    //   let khachhang = new Khachhang();
-    //   khachhang.diachi = this.secondForm.get('diachigiaohang').value;
-    //   khachhang.dienthoai = this.secondForm.get('dienthoai').value;
-    //   khachhang.tenkhachhang = this.secondForm.get('tenkhachhang').value;
-    //   this.tenkhachhang.setValue(khachhang);
-    // }
-    // if (this.secondForm.valid === true) {
-    //   this.store.dispatch(
-    //     this.action.addItemSuccess({
-    //       order: this.cartService.updateCart(
-    //         giaodichFields.khachhang,
-    //         this.secondForm.value,
-    //       ),
-    //     })
-    //   );
-    //   this.cartService.createOrder().subscribe((result: any) => {
-    //     // tslint:disable-next-line: no-console
-    //     console.log(result);
-    //     if (result.iSsuccess) {
-    //       this.store.dispatch(this.action.createOrderSuccess());
-    //       stepper.next();
-    //       localStorage.removeItem('order');
-    //       this.dataService.LoadData();
-    //     }
-    //   });
-    // }
-    // this.secondForm.markAsDirty();
+    if (typeof this.secondForm.value.tenkhachhang === "string") {
+      let khachhang = new Khachhang();
+      khachhang.diachi = this.secondForm.get("diachigiaohang").value;
+      khachhang.dienthoai = this.secondForm.get("dienthoai").value;
+      khachhang.tenkhachhang = this.secondForm.get("tenkhachhang").value;
+      this.tenkhachhang.setValue(khachhang);
+    }
+    if (this.secondForm.valid === true) {
+      this.store.dispatch(
+        this.action.addItemSuccess({
+          order: this.cartService.updateCart(
+            giaodichFields.khachhang,
+            this.secondForm.value
+          ),
+        })
+      );
+      this.cartService.createOrder().subscribe((result: any) => {
+        // tslint:disable-next-line: no-console
+        console.log(result);
+        if (result.iSsuccess) {
+          this.store.dispatch(this.action.createOrderSuccess());
+          stepper.next();
+          localStorage.removeItem("order");
+          this.dataService.LoadData();
+        }
+      });
+    }
+    this.secondForm.markAsDirty();
   }
 
   onChangeKhachHang(value) {
@@ -148,13 +155,16 @@ export class CartComponent implements OnInit {
   btnMuaSamClicked(stepper) {
     if (stepper.selectedIndex === 0) {
       this.onFirstStepNext(stepper);
-    } else if (stepper.selectedIndex === 1) {
+    } else if (stepper.selectedIndex === 2) {
       this.onSecondSubmit(stepper);
+    } else if (stepper.selectedIndex === 1) {
+      this.onSecondStepNext(stepper);
     }
   }
 
   btnBackClicked(btnBack) {
-    this.txtChotDon = " Xác nhận";
+    this.txtChotDon = " Tiếp theo";
+    this.txtIcon = "arrow-circle-right-outline";
   }
 
   btnDuyetkhuyenmai() {

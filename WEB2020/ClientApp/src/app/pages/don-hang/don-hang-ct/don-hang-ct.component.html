@@ -160,16 +160,24 @@
     </div>
     <div *ngIf="!isLuuThuc" class="div-button">
       <div class="btn1">
-        <button class="btn-add" nbButton status="success" (click)="btnMuaThemClicked()">
+        <button
+          class="btn-add"
+          nbButton
+          status="success"
+          (click)="btnMuaThemClicked()"
+        >
           Mua thêm <nb-icon icon="plus-circle-outline"></nb-icon>
         </button>
-        <button
+        <!-- <button
           nbButton
           status="danger"
           (click)="btnDuyenKMClicked()"
           class="btn-duyetKM"
         >
           Duyệt KM <nb-icon icon="gift-outline"></nb-icon>
+        </button> -->
+        <button nbButton status="basic" class="btn-duyetKM">
+          Lưu tạm <nb-icon icon="save-outline"></nb-icon>
         </button>
         <button
           nbButton
@@ -177,7 +185,7 @@
           (click)="btnLuuDonClicked()"
           class="btn-luu"
         >
-          Lưu đơn <nb-icon icon="save-outline"></nb-icon>
+          Lưu thực <nb-icon icon="save-outline"></nb-icon>
         </button>
       </div>
     </div>

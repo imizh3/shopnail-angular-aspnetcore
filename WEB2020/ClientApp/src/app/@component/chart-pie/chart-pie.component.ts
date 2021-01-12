@@ -33,23 +33,20 @@ export class ChartPieComponent implements OnDestroy, AfterViewInit {
         legend: {
           orient: "vertical",
           left: "left",
-          data: ["USA", "Germany", "France", "Canada", "Russia"],
+          data: ["Doanh số còn lại", "Doanh số thực"],
           textStyle: {
             color: echarts.textColor,
           },
         },
         series: [
           {
-            name: "Countries",
+            name: "Doanh số",
             type: "pie",
             radius: "80%",
             center: ["50%", "50%"],
             data: [
-              { value: 335, name: "Germany" },
-              { value: 310, name: "France" },
-              { value: 234, name: "Canada" },
-              { value: 135, name: "Russia" },
-              { value: 1548, name: "USA" },
+              { value: 300, name: "Doanh số còn lại" },
+              { value: 400, name: "Doanh số thực" },
             ],
             itemStyle: {
               emphasis: {

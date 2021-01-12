@@ -1,1 +1,158 @@
-<p>quan-tri works!</p>
+<nb-card>
+  <nb-tabset>
+    <nb-tab tabTitle="Quản lý tài khoản">
+      <div class="div-table" *ngIf="nguoidungs$">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên đăng nhập</th>
+              <th>Mật khẩu</th>
+              <th>Tên nhóm quyền</th>
+              <th>Họ tên</th>
+              <th>Trạng thái</th>
+              <th>#</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let nguoidung of nguoidungs; index as i">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td class="ma-giao-dich">{{ nguoidung.tendangnhap }}</td>
+              <td>{{ nguoidung.matkhau }}</td>
+              <td>{{ nguoidung.manhomquyen }}</td>
+              <td>{{ nguoidung.hovaten }}</td>
+              <td>{{ nguoidung.trangthai }}</td>
+              <td>
+                <button nbButton ghost>
+                  <nb-icon
+                    icon="trash-2-outline"
+                    [options]="{ animation: { type: 'zoom' } }"
+                  >
+                  </nb-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        style="float: right; margin-top: 15px"
+        nbButton
+        status="success"
+        (click)="openAddNguoiDung()"
+      >
+        Thêm mới<nb-icon icon="plus-circle-outline"></nb-icon>
+      </button>
+    </nb-tab>
+    <nb-tab tabTitle="Phân quyền hàng hóa">
+      <div class="input-group">
+        <p>Tên đăng nhập:</p>
+        <input
+          nbInput
+          fullWidth
+          class="form-control"
+          placeholder="Tìm tên đăng nhập..."
+        />
+      </div>
+      <div>
+        <p>Phân quyền:</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Chọn</th>
+              <th>Mã ngành hàng</th>
+              <th>Tên ngành hàng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+              </td>
+              <td>A</td>
+              <td>Nails</td>
+            </tr>
+            <tr>
+              <td>
+                <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+              </td>
+              <td>B</td>
+              <td>Mi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button style="float: right; margin-top: 15px" nbButton status="info">
+        Lưu<nb-icon icon="save-outline"></nb-icon>
+      </button>
+    </nb-tab>
+    <nb-tab tabTitle="Phân quyền chức năng">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên nhóm quyền</th>
+            <th>MenuBanHang</th>
+            <th>MenuDonHang</th>
+            <th>MenuQuanTri</th>
+            <th>MenuThongKe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Kế toán</td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Saler</td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Administrator</td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+            <td>
+              <nb-checkbox (checkedChange)="toggle($event)"></nb-checkbox>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button style="float: right; margin-top: 15px" nbButton status="info">
+        Lưu<nb-icon icon="save-outline"></nb-icon>
+      </button>
+    </nb-tab>
+  </nb-tabset>
+</nb-card>

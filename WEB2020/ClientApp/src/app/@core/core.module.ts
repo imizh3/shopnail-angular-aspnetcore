@@ -1,3 +1,4 @@
+import { NguoidungService } from "./mock/nguoidung.service";
 import { ReportService } from "./mock/report.service";
 
 import { OrderService } from "./mock/order.service";
@@ -68,6 +69,7 @@ const DATA_SERVICES = [
     DataService,
     OrderService,
     ReportService,
+    NguoidungService,
   },
 ];
 
