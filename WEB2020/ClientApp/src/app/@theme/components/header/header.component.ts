@@ -202,5 +202,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   openBaoCao() {
     this.router.navigate(["/Report/bao-cao"]);
   }
-  openCaNhan() {}
+  openCaNhan() {
+    this.router.navigate(["/Ca-nhan"]);
+  }
 }

@@ -1,3 +1,4 @@
+import { CaNhanComponent } from "./ca-nhan/ca-nhan.component";
 import { ThongKeComponent } from "./thong-ke/thong-ke.component";
 import { QuanTriComponent } from "./quan-tri/quan-tri.component";
 import { DonHangCtComponent } from "./don-hang/don-hang-ct/don-hang-ct.component";
@@ -79,6 +80,11 @@ const routes: Routes = [
         path: "Thong-ke",
         canActivate: [AuthGuard],
         component: ThongKeComponent,
+      },
+      {
+        path: "Ca-nhan",
+        canActivate: [AuthGuard],
+        component: CaNhanComponent,
       },
       {
         path: "chi-tiet-khuyen-mai",

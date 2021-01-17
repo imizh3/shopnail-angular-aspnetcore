@@ -1,0 +1,86 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../@theme/styles/themes";
+@include nb-install-component() {
+  .photo {
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+
+    img {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  .description {
+    padding: 30px;
+    border-left: none;
+
+    h1 {
+      color: #515151;
+      font-weight: 300;
+      padding-top: 15px;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    h2 {
+      color: #515151;
+      margin: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      margin: 0;
+      color: #727272;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 20px;
+      color: #727272;
+      padding: 20px 0;
+      margin: 0;
+    }
+
+    button {
+      outline: 0;
+      border: 0;
+      background: none;
+      border: 1px solid #d9d9d9;
+      padding: 8px 0px;
+      margin-bottom: 30px;
+      color: #515151;
+      text-transform: uppercase;
+      width: 125px;
+      font-family: inherit;
+      margin-right: 5px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+
+      &:hover {
+        // background: darken(white, 2%);
+        border: 1px solid #aedaa6;
+        color: #aedaa6;
+        cursor: pointer;
+      }
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .photo {
+      width: 45%;
+      float: left;
+    }
+    .description {
+      float: right;
+      width: 55%;
+      border-left: 2px solid #efefef;
+    }
+  }
+}

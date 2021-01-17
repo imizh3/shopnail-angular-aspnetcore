@@ -1,0 +1,43 @@
+<nb-card>
+  <nb-tabset>
+    <nb-tab tabTitle="Thông tin tài khoản">
+      <nb-card>
+        <div>
+          <div class="photo">
+            <img />
+          </div>
+          <div class="description">
+            <h2>Nguyễn Thị Hải Vân</h2>
+            <div class="input-group">
+              <p>Tên đăng nhập:</p>
+              <input
+                nbInput
+                fullWidth
+                class="form-control"
+                disabled
+                value="haivan"
+              />
+            </div>
+            <div class="input-group">
+              <p>Mật khẩu:</p>
+              <input
+                nbInput
+                fullWidth
+                type="password"
+                class="form-control"
+                disabled
+                value="1"
+              />
+            </div>
+            <input type="file" #image accept="image/*" style="display: none" />
+            <br />
+            <button type="button">Đổi ảnh</button>
+            <button type="button">Đổi mật khẩu</button>
+            <button type="button">Cập nhật</button>
+          </div>
+        </div>
+      </nb-card>
+    </nb-tab>
+    <nb-tab tabTitle="Thông tin bán hàng"> </nb-tab>
+  </nb-tabset>
+</nb-card>

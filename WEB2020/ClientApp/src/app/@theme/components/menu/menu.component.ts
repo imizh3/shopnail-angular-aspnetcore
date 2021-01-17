@@ -55,61 +55,64 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(IsLoadedCategory).subscribe((isLoaded) => {
       //if (!isLoaded) {
-      this.categoryService
-        .loadCategory()
-        .pipe(
-          map((d) =>
-            d.map((c) => ({
-              title: c.ten,
-              link: "/Home/" + c.ma,
-              children: d
-                .filter((f) => f.macha === c.ma)
-                .map((item) => ({
-                  title: item.ten,
-                  link: "/Home/" + item.macha + "/" + item.ma,
-                })),
-              macha: c.macha,
-            }))
-          ),
-          map((d) =>
-            d
-              .filter((c) => c.macha === null)
-              .map((c) => ({
-                title: c.title,
-                link: c.link,
-                children: c.children.length > 0 ? c.children : null,
+      if (this.menuItems === null || this.menuItems.length === 0) {
+        this.categoryService
+          .loadCategory()
+          .pipe(
+            map((d) =>
+              d.map((c) => ({
+                title: c.ten,
+                link: "/Home/" + c.ma,
+                children: d
+                  .filter((f) => f.macha === c.ma)
+                  .map((item) => ({
+                    title: item.ten,
+                    link: "/Home/" + item.macha + "/" + item.ma,
+                  })),
+                macha: c.macha,
               }))
+            ),
+            map((d) =>
+              d
+                .filter((c) => c.macha === null)
+                .map((c) => ({
+                  title: c.title,
+                  link: c.link,
+                  children: c.children.length > 0 ? c.children : null,
+                }))
+            )
           )
-        )
-        .subscribe((d) => {
-          var banhangitem = {
-            title: "Bán hàng",
-            icon: "home-outline",
-            link: "/Home",
-            children: d,
-          };
-          //if (!isLoaded) {
-          //this.menuService.addItems(d, "menu");
-          this.menuItems.push(banhangitem);
-          this.menuItems.push({
-            title: "Đơn hàng",
-            icon: "file-text-outline",
-            link: "/Don-hang",
+          .subscribe((d) => {
+            var banhangitem = {
+              title: "Bán hàng",
+              icon: "home-outline",
+              link: "/Home",
+              children: d,
+            };
+            //if (!isLoaded) {
+            //this.menuService.addItems(d, "menu");
+            this.menuItems.push(banhangitem);
+            this.menuItems.push({
+              title: "Đơn hàng",
+              icon: "file-text-outline",
+              link: "/Don-hang",
+            });
+            this.menuItems.push({
+              title: "Quản trị",
+              icon: "shield-outline",
+              link: "/Quan-tri",
+            });
+            this.menuItems.push({
+              title: "Thống kê",
+              icon: "pie-chart-outline",
+              link: "/Thong-ke",
+            });
+            this.store.dispatch(this.productAction.setIsloadedCategory(true));
+            //}
           });
-          this.menuItems.push({
-            title: "Quản trị",
-            icon: "shield-outline",
-            link: "/Quan-tri",
-          });
-          this.menuItems.push({
-            title: "Thống kê",
-            icon: "pie-chart-outline",
-            link: "/Thong-ke",
-          });
-          this.store.dispatch(this.productAction.setIsloadedCategory(true));
-          //}
-        });
-      //}
+      } else {
+        console.log(this.menuItems);
+      }
     });
     this.menuService.onSubmenuToggle().subscribe((menuBag) => {
       if (this.isClicked) {
@@ -120,8 +123,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.menuItems = [];
-    this.destroy$.next();
-    this.destroy$.complete();
+    // this.menuItems = [];
+    // this.destroy$.next();
+    // this.destroy$.complete();
   }
 }

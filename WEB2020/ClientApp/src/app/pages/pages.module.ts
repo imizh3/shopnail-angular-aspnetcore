@@ -37,6 +37,7 @@ import { ThemDonHangCtComponent } from "./don-hang/them-don-hang-ct/them-don-han
 import { QuanTriComponent } from "./quan-tri/quan-tri.component";
 import { ThongKeComponent } from "./thong-ke/thong-ke.component";
 import { ThemUserComponent } from "./quan-tri/them-user/them-user.component";
+import { CaNhanComponent } from './ca-nhan/ca-nhan.component';
 
 @NgModule({
   imports: [
@@ -76,6 +77,7 @@ import { ThemUserComponent } from "./quan-tri/them-user/them-user.component";
     QuanTriComponent,
     ThongKeComponent,
     ThemUserComponent,
+    CaNhanComponent,
   ],
   providers: [ProductsResolver],
 })
