@@ -1,35 +1,36 @@
-import { routes } from './../../../auth/auth-routing.module';
-import { CartService } from './../../../@core/mock/cart.service';
-import { ThemDonHangCtComponent } from './../them-don-hang-ct/them-don-hang-ct.component';
-import { FormControl } from '@angular/forms';
+import { routes } from "./../../../auth/auth-routing.module";
+import { CartService } from "./../../../@core/mock/cart.service";
+import { ThemDonHangCtComponent } from "./../them-don-hang-ct/them-don-hang-ct.component";
+import { FormControl } from "@angular/forms";
 import {
   NbGlobalPhysicalPosition,
   NbToastrService,
   NbWindowRef,
   NbWindowService,
-} from '@nebular/theme';
-import { DataService } from './../../../@core/mock/data.service';
-import { Khachhang } from './../../../@core/data/khachhang';
-import { DataSourceService } from './../../../services/data.service';
+} from "@nebular/theme";
+import { DataService } from "./../../../@core/mock/data.service";
+import { Khachhang } from "./../../../@core/data/khachhang";
+import { DataSourceService } from "./../../../services/data.service";
 
-import { ProductService } from './../../../@core/mock/product.service';
-import { GiaoDichRequest } from './../../../@core/data/giaodichRequest';
-import { Observable } from 'rxjs';
-import { Giaodichct } from './../../../@core/data/giaodichct';
-import { OrderService } from './../../../@core/mock/order.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { Product } from '../../../@core/data/product';
-import { Giaodich } from '../../../@core/data/giaodich';
-import { TinhTien } from '../../../@core/utils/tinhTien';
+import { ProductService } from "./../../../@core/mock/product.service";
+import { GiaoDichRequest } from "./../../../@core/data/giaodichRequest";
+import { Observable } from "rxjs";
+import { Giaodichct } from "./../../../@core/data/giaodichct";
+import { OrderService } from "./../../../@core/mock/order.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { filter, map } from "rxjs/operators";
+import { Product } from "../../../@core/data/product";
+import { Giaodich } from "../../../@core/data/giaodich";
+import { TinhTien } from "../../../@core/utils/tinhTien";
 
 @Component({
-  selector: 'ngx-don-hang-ct',
-  templateUrl: './don-hang-ct.component.html',
-  styleUrls: ['./don-hang-ct.component.scss'],
+  selector: "ngx-don-hang-ct",
+  templateUrl: "./don-hang-ct.component.html",
+  styleUrls: ["./don-hang-ct.component.scss"],
 })
 export class DonHangCtComponent implements OnInit {
+  isLoading = false;
   magiaodichpk: string;
   giaoDichRequest: GiaoDichRequest;
   giaodichcts$: Observable<any>;
@@ -42,8 +43,8 @@ export class DonHangCtComponent implements OnInit {
   txtGhichu: FormControl;
   txtDiachi: FormControl;
   txtDiachigiaohang: FormControl;
-  @ViewChild('thung') thung: ElementRef;
-  @ViewChild('le') le: ElementRef;
+  @ViewChild("thung") thung: ElementRef;
+  @ViewChild("le") le: ElementRef;
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
@@ -52,8 +53,8 @@ export class DonHangCtComponent implements OnInit {
     private dataService: DataService,
     private windowService: NbWindowService,
     private toastrService: NbToastrService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams
@@ -65,8 +66,8 @@ export class DonHangCtComponent implements OnInit {
       });
     this.products = this.productService.products;
     this.data.currentGiaoDich.subscribe((e) => {
-      if (!e || e.makhachhang === '' || !e.makhachhang) {
-        this.router.navigate(['/Don-hang']);
+      if (!e || e.makhachhang === "" || !e.makhachhang) {
+        this.router.navigate(["/Don-hang"]);
       }
       this.giaoDich = e;
       if (this.giaoDich.trangthai === 1) {
@@ -88,6 +89,7 @@ export class DonHangCtComponent implements OnInit {
   }
 
   loadChiTietDonHang() {
+    this.isLoading = true;
     this.giaoDichRequest = new GiaoDichRequest();
     this.giaoDichRequest.magiaodichpk = this.magiaodichpk;
     this.giaodichcts$ = this.orderService.getOrderDetails(this.giaoDichRequest);
@@ -102,6 +104,7 @@ export class DonHangCtComponent implements OnInit {
       });
       this.loadThungLe();
       this.giaoDich.giaodichct = this.giaodichcts;
+      this.isLoading = false;
     });
   }
   loadProductName(masieuthi: string) {
@@ -112,13 +115,13 @@ export class DonHangCtComponent implements OnInit {
     //this.giaodichcts = this.giaodichcts.filter((d) => d.dongiacovat !== 0);
     this.giaodichcts.forEach((element) => {
       const product = this.products.find(
-        (d) => d.masieuthi === element.masieuthi,
+        (d) => d.masieuthi === element.masieuthi
       );
       element.quycach = product.quycach;
       element.soluong = parseFloat(element.soluong.toString());
       element.sothung = TinhTien.ConverThungByLe(
         element.soluong,
-        element.quycach,
+        element.quycach
       );
       // console.log(element.sothung.indexOf("/"));
     });
@@ -127,16 +130,16 @@ export class DonHangCtComponent implements OnInit {
     let editedGiaoDich = new Giaodich();
     editedGiaoDich = this.orderService.updateOrderDetail(
       giaodichct,
-      'sothung',
+      "sothung",
       value,
-      this.giaoDich,
+      this.giaoDich
     );
   }
 
   loadKhachHang() {
     this.khachHangs = this.dataService.dmKhachhang;
     this.khachHang = this.khachHangs.find(
-      (d) => d.makhachhang === this.giaoDich.makhachhang,
+      (d) => d.makhachhang === this.giaoDich.makhachhang
     );
 
     if (
@@ -152,22 +155,22 @@ export class DonHangCtComponent implements OnInit {
     let editedGiaoDich = new Giaodich();
     editedGiaoDich = this.orderService.updateOrderDetail(
       newData,
-      'soluong',
+      "soluong",
       soluong.target.value,
-      this.giaoDich,
+      this.giaoDich
     );
   }
   onDeleteConfirm(giaodichct: any) {
     const newGiaoDich = this.orderService.removeOrderDetail(
       giaodichct,
-      this.giaoDich,
+      this.giaoDich
     );
     this.data.changeGiaoDich(newGiaoDich);
     this.giaodichcts = this.giaoDich.giaodichct;
   }
   btnMuaThemClicked() {
     this.windowService.open(ThemDonHangCtComponent, {
-      title: 'Thêm mặt hàng mua',
+      title: "Thêm mặt hàng mua",
     });
   }
   onEditTyleck(data: any, field: string, ck: any): void {
@@ -178,34 +181,39 @@ export class DonHangCtComponent implements OnInit {
       newData,
       field,
       ck.target.value,
-      this.giaoDich,
+      this.giaoDich
     );
   }
   btnLuuDonClicked() {
-    this.orderService.updateOrder({
-      ...this.giaoDich, ghichu: this.txtGhichu.value,
-      khachhang: {
-        ...this.khachHang, diachi: this.txtDiachi.value,
-        diachigiaohang: this.txtDiachigiaohang.value,
-      },
-    }).subscribe(
-      (data) => {
-        if (data.status === 200) {
-          this.toastrService.show('Thành công!', 'Lưu dữ liệu!', {
-            position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-            status: 'success',
-          });
-        } else {
-          this.toastrService.show('Thất bại!', 'Lưu dữ liệu!', {
-            position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-            status: 'danger',
-          });
-        }
-      },
-      // tslint:disable-next-line: no-console
-      (error) => console.log(error),
-    );
+    this.orderService
+      .updateOrder({
+        ...this.giaoDich,
+        ghichu: this.txtGhichu.value,
+        khachhang: {
+          ...this.khachHang,
+          diachi: this.txtDiachi.value,
+          diachigiaohang: this.txtDiachigiaohang.value,
+        },
+      })
+      .subscribe(
+        (data) => {
+          if (data.status === 200) {
+            this.toastrService.show("Thành công!", "Lưu dữ liệu!", {
+              position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+              status: "success",
+            });
+          } else {
+            this.toastrService.show("Thất bại!", "Lưu dữ liệu!", {
+              position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+              status: "danger",
+            });
+          }
+        },
+        // tslint:disable-next-line: no-console
+        (error) => console.log(error)
+      );
   }
+  btnLuuThuc() {}
   btnDuyenKMClicked() {
     this.orderService.duyetKM(this.giaoDich);
     console.log(this.giaoDich);

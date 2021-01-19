@@ -79,14 +79,14 @@ namespace WEB2020.Controllers
             return Ok(users);
         }
 
-        // [HttpGet("{id}")]
-        // public IActionResult GetById(string id)
-        // {
-        //     var user = _userService.GetById(id);
-        //     if (user == null) return NotFound();
+        [HttpGet("{id}")]
+        public IActionResult GetById(string id)
+        {
+            var user = _userService.GetById(id);
+            if (user == null) return NotFound();
 
-        //     return Ok(user);
-        // }
+            return Ok(user);
+        }
 
         // [HttpGet("{id}/refresh-tokens")]
         // public IActionResult GetRefreshTokens(string id)

@@ -32,7 +32,10 @@ export class ProductService {
 
   LoadData(action: any) {
     this.products$ = this.http
-      .get<Product[]>(this.lib.baseUrl + "api/products", this.lib.httpOption())
+      .get<Product[]>(
+        this.lib.baseUrl + "api/Products/getProducts",
+        this.lib.httpOption()
+      )
       .pipe((d) => d);
     this.products$.subscribe((d) => {
       this.products = d;

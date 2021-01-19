@@ -97,11 +97,11 @@ export class MenuComponent implements OnInit, OnDestroy {
               icon: "file-text-outline",
               link: "/Don-hang",
             });
-            this.menuItems.push({
-              title: "Quản trị",
-              icon: "shield-outline",
-              link: "/Quan-tri",
-            });
+            // this.menuItems.push({
+            //   title: "Quản trị",
+            //   icon: "shield-outline",
+            //   link: "/Quan-tri",
+            // });
             this.menuItems.push({
               title: "Thống kê",
               icon: "pie-chart-outline",

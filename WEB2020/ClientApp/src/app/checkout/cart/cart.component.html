@@ -32,7 +32,6 @@
               >
               </ngx-auto-khachhang>
             </div>
-
             <ng-container
               *ngIf="
                 tenkhachhang.invalid &&
@@ -129,9 +128,54 @@
             </button>
           </form>
         </nb-step>
-        <nb-step [stepControl]="fouthForm">
+        <!-- <nb-step [stepControl]="thirdForm">
           <div class="step-container">
-            <h6 class="center">Thông tin thanh toán, vận chuyển</h6>
+            <h6 class="center">Chọn cách thanh toán, giao nhận</h6>
+            <nb-accordion>
+              <nb-accordion-item>
+                <nb-accordion-item-header
+                  >Chọn hình thức thanh toán</nb-accordion-item-header
+                >
+                <nb-accordion-item-body>
+                  <nb-radio-group [(ngModel)]="optionThanhToan">
+                    <nb-radio
+                      *ngFor="let option of optionThanhToans"
+                      [value]="option.value"
+                    >
+                      {{ option.label }}
+                    </nb-radio>
+                  </nb-radio-group>
+                </nb-accordion-item-body>
+              </nb-accordion-item>
+              <nb-accordion-item>
+                <nb-accordion-item-header
+                  >Tính phí giao hàng</nb-accordion-item-header
+                >
+                <nb-accordion-item-body>
+                  <div class="loc-field">
+                    <p>Chọn đơn vị vận chuyển:</p>
+                    <nb-select
+                      placeholder="GHTK, Ship khác, ..."
+                      [(selected)]="donvivanchuyen"
+                      style="margin: auto; width: 30vw"
+                    >
+                      <nb-option value="1">Giaohangtietkiem.vn</nb-option>
+                      <nb-option value="2">Ship khác</nb-option>
+                    </nb-select>
+                  </div>
+
+                  <ng-template #name *ngIf=""></ng-template>
+
+                  <button
+                    nbButton
+                    style="margin-top: 10px"
+                    (click)="btnTinhPhi()"
+                  >
+                    Tính phí
+                  </button>
+                </nb-accordion-item-body>
+              </nb-accordion-item>
+            </nb-accordion>
             <button
               class="prev-button"
               nbButton
@@ -141,8 +185,8 @@
               Trở lại
             </button>
           </div>
-        </nb-step>
-        <nb-step [stepControl]="thirdForm">
+        </nb-step> -->
+        <nb-step [stepControl]="fourthFrom">
           <div class="step-container">
             <h3>Thành công!</h3>
             <button nbButton routerLink="/Home">Tiếp tục mua sắm</button>

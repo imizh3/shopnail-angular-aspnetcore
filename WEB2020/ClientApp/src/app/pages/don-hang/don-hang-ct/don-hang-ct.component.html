@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="div-table">
+    <div class="div-table" [nbSpinner]="isLoading" nbSpinnerStatus="primary">
       <table class="table">
         <thead>
           <tr>
@@ -176,7 +176,12 @@
         >
           Duyệt KM <nb-icon icon="gift-outline"></nb-icon>
         </button> -->
-        <button nbButton status="basic" class="btn-duyetKM">
+        <button
+          nbButton
+          status="basic"
+          class="btn-duyetKM"
+          (click)="btnLuuDonClicked()"
+        >
           Lưu tạm <nb-icon icon="save-outline"></nb-icon>
         </button>
         <button
@@ -187,9 +192,9 @@
         >
           Lưu thực <nb-icon icon="save-outline"></nb-icon>
         </button>
-        <button nbButton status="basic" class="btn-luu">
+        <!-- <button nbButton status="basic" class="btn-luu">
           In <nb-icon icon="printer-outline"></nb-icon>
-        </button>
+        </button> -->
       </div>
     </div>
   </nb-card-body>

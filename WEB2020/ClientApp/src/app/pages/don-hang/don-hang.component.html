@@ -84,7 +84,6 @@
             <th>Ngày đặt</th>
             <th>Tiền hàng</th>
             <th>Tiền CK</th>
-            <th>Tiền CK trên đơn</th>
             <th>Tổng tiền</th>
             <th>#</th>
           </tr>
@@ -103,7 +102,6 @@
             <td>{{ giaodich.ngayphatsinh | date: "dd/MM/yyyy" }}</td>
             <td>{{ giaodich.tienhang | number: "1.0" }}</td>
             <td>{{ giaodich.tienck | number: "1.0" }}</td>
-            <td>{{ giaodich.tiencktrendon | number: "1.0" }}</td>
             <td>
               {{ giaodich.thanhtien | number: "1.0" }}
             </td>
@@ -131,7 +129,6 @@
             <td style="font-weight: bold">Tổng :</td>
             <td>{{ tongTienHang | number: "1.0" }}</td>
             <td>{{ tongTienCK | number: "1.0" }}</td>
-            <td>{{ tongTienCkTrenDon | number: "1.0" }}</td>
             <td>{{ tongThanhTien | number: "1.0" }}</td>
             <td></td>
           </tr>

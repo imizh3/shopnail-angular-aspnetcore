@@ -18,4 +18,10 @@ export class NguoidungService {
       this.lib.httpOption()
     );
   }
+  getNguoidung(tendangnhap: string) {
+    return this.http.get<Nguoidung>(
+      this.lib.baseUrl + "api/Users" + "/" + tendangnhap,
+      this.lib.httpOption()
+    );
+  }
 }

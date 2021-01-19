@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
-  fouthForm: FormGroup;
+  fourthFrom: FormGroup;
   product$: Observable<Giaodichct[]>;
   tongSoLuong: number;
   tongTienHang: number;
@@ -32,7 +32,17 @@ export class CartComponent implements OnInit {
   tienChietKhau: number;
   txtChotDon: string;
   txtIcon: string;
-  sdt: number;
+  donvivanchuyen: any;
+  isGHTK: boolean = false;
+  optionThanhToans = [
+    {
+      value: "1",
+      label: "Thanh toán luôn (tại quầy, chuyển khoản)",
+    },
+    { value: "2", label: "Thanh toán sau (ship COD)" },
+  ];
+  optionThanhtoan;
+
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
@@ -83,6 +93,8 @@ export class CartComponent implements OnInit {
     this.hadData = this.isHadData();
     if (this.isHadData()) {
       stepper.next();
+      this.txtChotDon = "Chốt Đơn";
+      this.txtIcon = "shopping-cart-outline";
     } else {
       this.hadData = this.isHadData();
     }
@@ -151,14 +163,28 @@ export class CartComponent implements OnInit {
         this.chietKhau
       );
   }
-
+  btnTinhPhi() {
+    if (this.donvivanchuyen === "1") {
+      this.isGHTK = true;
+    } else if (this.donvivanchuyen === "2") {
+      this.isGHTK = false;
+    } else {
+    }
+  }
   btnMuaSamClicked(stepper) {
     if (stepper.selectedIndex === 0) {
       this.onFirstStepNext(stepper);
-    } else if (stepper.selectedIndex === 2) {
-      this.onSecondSubmit(stepper);
     } else if (stepper.selectedIndex === 1) {
-      this.onSecondStepNext(stepper);
+      if (this.secondForm.valid === true) {
+        //this.onSecondStepNext(stepper);
+        this.onSecondSubmit(stepper);
+      } else if (this.tenkhachhang.invalid) {
+        this.tenkhachhang.markAsDirty();
+      } else if (this.dienthoai.invalid) {
+        this.dienthoai.markAsDirty();
+      } else if (this.diachigiaohang.invalid) {
+        this.diachigiaohang.markAsDirty();
+      }
     }
   }
 

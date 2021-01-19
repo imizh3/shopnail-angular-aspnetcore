@@ -100,22 +100,22 @@ export const NB_CORE_PROVIDERS = [
           endpoint: "Users/authenticate",
           method: "post",
         },
-        register: {
-          endpoint: "/auth/sign-up",
-          method: "post",
-        },
+        // register: {
+        //   endpoint: "/auth/sign-up",
+        //   method: "post",
+        // },
         logout: {
           endpoint: "Users/signout",
           method: "post",
         },
-        requestPass: {
-          endpoint: "/auth/request-pass",
-          method: "post",
-        },
-        resetPass: {
-          endpoint: "/auth/reset-pass",
-          method: "post",
-        },
+        // requestPass: {
+        //   endpoint: "/auth/request-pass",
+        //   method: "post",
+        // },
+        // resetPass: {
+        //   endpoint: "/auth/reset-pass",
+        //   method: "post",
+        // },
       }),
     ],
     forms: {

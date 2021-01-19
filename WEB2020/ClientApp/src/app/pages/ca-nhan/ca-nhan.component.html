@@ -1,13 +1,13 @@
 <nb-card>
   <nb-tabset>
-    <nb-tab tabTitle="Thông tin tài khoản">
+    <nb-tab tabTitle="Thông tin tài khoản" *ngIf="user">
       <nb-card>
         <div>
           <div class="photo">
             <img />
           </div>
           <div class="description">
-            <h2>Nguyễn Thị Hải Vân</h2>
+            <h2>{{ user.Hovaten }}</h2>
             <div class="input-group">
               <p>Tên đăng nhập:</p>
               <input
@@ -15,7 +15,7 @@
                 fullWidth
                 class="form-control"
                 disabled
-                value="haivan"
+                [value]="user.Tendangnhap"
               />
             </div>
             <div class="input-group">
@@ -31,13 +31,151 @@
             </div>
             <input type="file" #image accept="image/*" style="display: none" />
             <br />
-            <button type="button">Đổi ảnh</button>
+            <!-- <button type="button">Đổi ảnh</button>
             <button type="button">Đổi mật khẩu</button>
-            <button type="button">Cập nhật</button>
+            <button type="button">Cập nhật</button> -->
           </div>
         </div>
       </nb-card>
     </nb-tab>
-    <nb-tab tabTitle="Thông tin bán hàng"> </nb-tab>
+    <nb-tab tabTitle="Thông tin bán hàng">
+      <nb-card>
+        <nb-card-header>
+          <div style="display: inline">
+            Thống kê bán hàng
+            <button
+              class="btn-filter-mobile"
+              [nbPopover]="templateRef"
+              nbButton
+              nbPopoverPlacement="bottom"
+              size="small"
+              style="float: right"
+            >
+              Lọc<nb-icon icon="funnel-outline"></nb-icon>
+            </button>
+          </div>
+          <ng-template #templateRef>
+            <div style="padding: 1rem; width: 25vw">
+              <p style="margin-bottom: 0.5rem">Từ ngày:</p>
+              <input
+                type="date"
+                nbInput
+                fieldSize="small"
+                fullWidth
+                [(ngModel)]="tuNgayDate"
+              />
+              <p style="margin-bottom: 0.5rem">Đến ngày:</p>
+              <input
+                type="date"
+                nbInput
+                fieldSize="small"
+                fullWidth
+                [(ngModel)]="denNgayDate"
+              />
+              <!-- <p style="margin-bottom: 0.5rem">Gộp theo:</p>
+              <nb-select size="small">
+                <nb-option value="">Đơn vị</nb-option>
+                <nb-option value="">Kho hàng</nb-option>
+                <nb-option value="">Khách hàng</nb-option>
+                <nb-option value="">Ngành hàng</nb-option>
+                <nb-option value="">Nhóm hàng</nb-option>
+                <nb-option value="">NCC</nb-option>
+              </nb-select> -->
+              <button
+                nbButton
+                size="small"
+                style="float: right; margin: 7px 0px 7px 0px"
+                (click)="btnLocClicked()"
+              >
+                Lọc<nb-icon icon="funnel-outline"></nb-icon>
+              </button>
+            </div>
+          </ng-template>
+        </nb-card-header>
+        <nb-card-body>
+          <div *ngIf="bc"><ngx-total-bar [data]="bc"></ngx-total-bar></div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          <div style="display: inline">
+            Doanh số
+            <!-- <button
+              class="btn-filter-mobile"
+              [nbPopover]="templateRef"
+              nbButton
+              nbPopoverPlacement="bottom"
+              size="small"
+              style="float: right"
+            >
+              Lọc<nb-icon icon="funnel-outline"></nb-icon>
+            </button> -->
+          </div>
+          <!-- <ng-template #templateRef>
+            <div style="padding: 1rem; width: 50vw">
+              <p style="margin-bottom: 0.5rem">Từ ngày:</p>
+              <input type="date" nbInput fieldSize="small" fullWidth />
+              <p style="margin-bottom: 0.5rem">Đến ngày:</p>
+              <input type="date" nbInput fieldSize="small" fullWidth />
+              <p style="margin-bottom: 0.5rem">Gộp theo:</p>
+              <nb-select size="small">
+                <nb-option value="">Đơn vị</nb-option>
+                <nb-option value="">Kho hàng</nb-option>
+                <nb-option value="">Khách hàng</nb-option>
+                <nb-option value="">Ngành hàng</nb-option>
+                <nb-option value="">Nhóm hàng</nb-option>
+                <nb-option value="">NCC</nb-option>
+              </nb-select>
+              <button nbButton size="small" style="float: right">
+                Lọc<nb-icon icon="funnel-outline"></nb-icon>
+              </button>
+            </div>
+          </ng-template> -->
+        </nb-card-header>
+        <nb-card-body>
+          <ngx-chart-pie [data]="bc" tenbieudo="Doanh số"></ngx-chart-pie>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          <div style="display: inline">
+            Doanh thu
+            <!-- <button
+              class="btn-filter-mobile"
+              [nbPopover]="templateRef"
+              nbButton
+              nbPopoverPlacement="bottom"
+              size="small"
+              style="float: right"
+            >
+              Lọc<nb-icon icon="funnel-outline"></nb-icon>
+            </button> -->
+          </div>
+          <!-- <ng-template #templateRef>
+            <div style="padding: 1rem; width: 50vw">
+              <p style="margin-bottom: 0.5rem">Từ ngày:</p>
+              <input type="date" nbInput fieldSize="small" fullWidth />
+              <p style="margin-bottom: 0.5rem">Đến ngày:</p>
+              <input type="date" nbInput fieldSize="small" fullWidth />
+              <p style="margin-bottom: 0.5rem">Gộp theo:</p>
+              <nb-select size="small">
+                <nb-option value="">Đơn vị</nb-option>
+                <nb-option value="">Kho hàng</nb-option>
+                <nb-option value="">Khách hàng</nb-option>
+                <nb-option value="">Ngành hàng</nb-option>
+                <nb-option value="">Nhóm hàng</nb-option>
+                <nb-option value="">NCC</nb-option>
+              </nb-select>
+              <button nbButton size="small" style="float: right">
+                Lọc<nb-icon icon="funnel-outline"></nb-icon>
+              </button>
+            </div>
+          </ng-template> -->
+        </nb-card-header>
+        <nb-card-body>
+          <ngx-chart-pie [data]="bc" tenbieudo="Doanh thu"></ngx-chart-pie>
+        </nb-card-body>
+      </nb-card>
+    </nb-tab>
   </nb-tabset>
 </nb-card>

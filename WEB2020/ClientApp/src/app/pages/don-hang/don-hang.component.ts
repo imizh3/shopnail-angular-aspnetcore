@@ -1,34 +1,34 @@
-import { NbToastrService } from '@nebular/theme';
-import { Khachhang } from './../../@core/data/khachhang';
-import { DataService } from './../../@core/mock/data.service';
-import { DataSourceService } from './../../services/data.service';
-import { GiaoDichRequest } from './../../@core/data/giaodichRequest';
-import { Router } from '@angular/router';
-import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { OrderService } from '../../@core/mock/order.service';
-import { DatePipe } from '@angular/common';
-import { Giaodich } from '../../@core/data/giaodich';
-import { Giaodichct } from '../../@core/data/giaodichct';
-import { NbGlobalPhysicalPosition, NbPopoverDirective } from '@nebular/theme';
+import { NbToastrService } from "@nebular/theme";
+import { Khachhang } from "./../../@core/data/khachhang";
+import { DataService } from "./../../@core/mock/data.service";
+import { DataSourceService } from "./../../services/data.service";
+import { GiaoDichRequest } from "./../../@core/data/giaodichRequest";
+import { Router } from "@angular/router";
+import { NbAuthJWTToken, NbAuthService } from "@nebular/auth";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { OrderService } from "../../@core/mock/order.service";
+import { DatePipe } from "@angular/common";
+import { Giaodich } from "../../@core/data/giaodich";
+import { Giaodichct } from "../../@core/data/giaodichct";
+import { NbGlobalPhysicalPosition, NbPopoverDirective } from "@nebular/theme";
 
 @Component({
-  selector: 'ngx-don-hang',
-  templateUrl: './don-hang.component.html',
-  styleUrls: ['./don-hang.component.scss'],
+  selector: "ngx-don-hang",
+  templateUrl: "./don-hang.component.html",
+  styleUrls: ["./don-hang.component.scss"],
 })
 export class DonHangComponent implements OnInit {
   user: any;
-  trangThai = '1';
-  tuNgayDate = this.datePipe.transform(new Date(Date.now()), 'yyyy-MM-dd');
-  denNgayDate = this.datePipe.transform(new Date(Date.now()), 'yyyy-MM-dd');
+  trangThai = "1";
+  tuNgayDate = this.datePipe.transform(new Date(Date.now()), "yyyy-MM-dd");
+  denNgayDate = this.datePipe.transform(new Date(Date.now()), "yyyy-MM-dd");
   giaodichRequest: GiaoDichRequest;
   giaodichs$: any;
   giaodichcts: Giaodichct[];
   tongTienCK: number = 0;
   tongTienHang: number = 0;
   tongThanhTien: number = 0;
-  tongTienCkTrenDon: number = 0;
+
   isLoading = false;
   khachHangs: Khachhang[];
   @ViewChild(NbPopoverDirective) popover;
@@ -40,8 +40,8 @@ export class DonHangComponent implements OnInit {
     private data: DataSourceService,
     private dataService: DataService,
     private dataSourceService: DataSourceService,
-    private toastrService: NbToastrService,
-  ) { }
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit(): void {
     this.authService.getToken().subscribe((token: NbAuthJWTToken) => {
@@ -50,7 +50,7 @@ export class DonHangComponent implements OnInit {
         //console.log(this.user.unique_name)
         //console.log(this.user);
       } else {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(["/auth/login"]);
       }
     });
     this.giaodichRequest = new GiaoDichRequest();
@@ -62,14 +62,14 @@ export class DonHangComponent implements OnInit {
       this.denNgayDate = d[1];
     });
     this.isLoading = true;
-    this.tongThanhTien = 0;
-    this.tongTienCK = 0;
-    this.tongTienHang = 0;
-    this.tongTienCkTrenDon = 0;
+    // this.tongThanhTien = 0;
+    // this.tongTienCK = 0;
+    // this.tongTienHang = 0;
+
     this.giaodichRequest.tuNgay = this.tuNgayDate.toString();
     this.giaodichRequest.denNgay = this.denNgayDate.toString();
     this.giaodichRequest.trangThai = this.trangThai;
-    this.giaodichRequest.maNhanVien = '';
+    this.giaodichRequest.maNhanVien = "";
     const orders = this.orderService.getOrders(this.giaodichRequest);
     orders.subscribe((d) => {
       this.giaodichs$ = d;
@@ -78,41 +78,42 @@ export class DonHangComponent implements OnInit {
         this.tongThanhTien = this.tongThanhTien + parseFloat(element.thanhtien);
         this.tongTienCK = this.tongTienCK + parseFloat(element.tienck);
         this.tongTienHang = this.tongTienHang + parseFloat(element.tienhang);
-        this.tongTienCkTrenDon = this.tongTienCkTrenDon + parseFloat(element.tiencktrendon);
       });
     });
   }
   btnLocClicked() {
     this.isLoading = true;
-    this.tongThanhTien = 0;
-    this.tongTienCK = 0;
-    this.tongTienHang = 0;
-    this.tongTienCkTrenDon = 0;
+    // this.tongThanhTien = 0;
+    // this.tongTienCK = 0;
+    // this.tongTienHang = 0;
+
     this.giaodichRequest.tuNgay = this.tuNgayDate.toString();
     this.giaodichRequest.denNgay = this.denNgayDate.toString();
     this.giaodichRequest.trangThai = this.trangThai;
-    this.giaodichRequest.maNhanVien = '';
+    this.giaodichRequest.maNhanVien = "";
     const orders = this.orderService.getOrders(this.giaodichRequest);
     orders.subscribe((d) => {
+      this.tongThanhTien = 0;
+      this.tongTienHang = 0;
+      this.tongTienCK = 0;
       this.giaodichs$ = d;
       this.isLoading = false;
       this.giaodichs$.forEach((element) => {
         this.tongThanhTien = this.tongThanhTien + parseFloat(element.thanhtien);
         this.tongTienCK = this.tongTienCK + parseFloat(element.tienck);
         this.tongTienHang = this.tongTienHang + parseFloat(element.tienhang);
-        this.tongTienCkTrenDon = this.tongTienCkTrenDon + parseFloat(element.tiencktrendon);
       });
     });
     this.dataSourceService.changeNgayFilter(
       this.tuNgayDate.toString(),
-      this.denNgayDate.toString(),
+      this.denNgayDate.toString()
     );
     this.popover.hide();
   }
   btnChiTietDonHangClicked(magiaodichpk) {
     if (magiaodichpk) {
       this.luuGiaoDichTrongService(magiaodichpk);
-      this.router.navigate(['/chi-tiet-don-hang'], {
+      this.router.navigate(["/chi-tiet-don-hang"], {
         queryParams: { query: magiaodichpk },
       });
     }
@@ -120,7 +121,7 @@ export class DonHangComponent implements OnInit {
 
   luuGiaoDichTrongService(magiaodichpk) {
     const giaoDich = this.giaodichs$.find(
-      (d) => d.magiaodichpk === magiaodichpk,
+      (d) => d.magiaodichpk === magiaodichpk
     );
     this.data.changeGiaoDich(giaoDich);
   }
@@ -129,23 +130,32 @@ export class DonHangComponent implements OnInit {
       this.khachHangs = this.dataService.dmKhachhang;
       return this.khachHangs.find((d) => d.makhachhang === makhachhang)
         .tenkhachhang;
-    } catch (error) { }
+    } catch (error) {}
   }
 
   onDeleteConfirm(magiaodichpk) {
-    const xoa = window.confirm('Bạn có xoá đơn hàng: ' + magiaodichpk + ' không?');
+    const xoa = window.confirm(
+      "Bạn có xoá đơn hàng: " + magiaodichpk + " không?"
+    );
     if (xoa) {
       this.orderService.deleteOrder(magiaodichpk).subscribe((d: any) => {
         if (d.iSsuccess === true)
-          this.toastrService.show('Thành công!', 'Xoá đơn hàng! ' + magiaodichpk,
-            { position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });
+          this.toastrService.show(
+            "Thành công!",
+            "Xoá đơn hàng! " + magiaodichpk,
+            {
+              position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+              status: "success",
+            }
+          );
         else {
-          this.toastrService.show('Không thành công!', 'Lỗi ' + d.message,
-            { position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'warning' });
+          this.toastrService.show("Không thành công!", "Lỗi " + d.message, {
+            position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+            status: "warning",
+          });
         }
         this.load();
       });
     }
   }
-
 }

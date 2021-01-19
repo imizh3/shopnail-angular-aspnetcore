@@ -24,7 +24,7 @@ namespace WEB2020.Data
         {
             DateTime tuNgay = DateTime.Parse(request.tuNgay);
             DateTime denNgay = DateTime.Parse(request.denNgay);
-            DataTable DT_BaoCaoXBBTH = DB.BC_XUATBANBUONTH(tuNgay, denNgay, this.Madonvi, "", "", "", "", "", "", "", "", request.trangthai, "", "", "", 1);
+            DataTable DT_BaoCaoXBBTH = DB.BC_XUATBANBUONTH(tuNgay, denNgay, this.Madonvi, "", "", "", "", "", "", "", "", request.trangthai, "", request.manhanvien, "", 1);
             List<BaoCaoXBBModel> baoCaos = new List<BaoCaoXBBModel>();
             baoCaos = LIB.ConvertDataTableToList<BaoCaoXBBModel>(DT_BaoCaoXBBTH);
             return baoCaos;

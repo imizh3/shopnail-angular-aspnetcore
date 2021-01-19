@@ -39,9 +39,19 @@
       font-weight: 900;
     }
   }
-
+  .loc-field {
+    display: flex;
+    p {
+      margin-right: 0.5rem;
+    }
+    input {
+      margin-left: 0.5rem;
+      margin: auto;
+    }
+  }
   .prev-button {
     margin-right: 1rem;
+    margin-top: 1rem;
   }
   .step-header-index {
     width: fit-content;

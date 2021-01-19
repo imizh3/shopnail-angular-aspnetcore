@@ -116,7 +116,8 @@ namespace WEB2020.Data
 
         public Nguoidung GetById(string id)
         {
-            return _context.Nguoidung.Find(id, this.Madonvi);
+
+            return _context.Nguoidung.Where(u => u.Madonvi == this.Madonvi).Where(u => u.Tendangnhap == id).First();
         }
 
         // helper methods

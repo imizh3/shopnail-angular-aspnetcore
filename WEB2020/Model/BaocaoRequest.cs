@@ -6,5 +6,7 @@ namespace WEB2020.Model
         public string tuNgay { get; set; }
         public string denNgay { get; set; }
 
+        public string manhanvien { get; set; }
+
     }
 }

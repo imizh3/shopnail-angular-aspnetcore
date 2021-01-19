@@ -10,7 +10,5 @@ export class TotalBarComponent implements OnInit {
   @Input() data: BaocaoxuatbanbuonTH;
   constructor() {}
 
-  ngOnInit(): void {
-    //console.log(this.data);
-  }
+  ngOnInit(): void {}
 }
