@@ -1,6 +1,13 @@
 <div class="row" style="padding-top: 5px">
   <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
-    <nb-user [name]="product.tendaydu" [title]="product.masieuthi"> </nb-user>
+    <nb-user
+      [name]="product.tendaydu"
+      [title]="product.masieuthi"
+      picture="{{ baseUrl }}/{{ getImage(product.masieuthi) }}"
+      size="giant"
+      shape="rectangle"
+    >
+    </nb-user>
     <p
       style="
         margin-top: 2px;
@@ -78,7 +85,6 @@
             title="Thêm sp KM"
           >
             <nb-icon [icon]="'plus'" pack="fa"></nb-icon>
-
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { AppState } from "../../../@store/app-state";
 import { IsLoadedCategory } from "../../../@store/selectors/product-selectors";
 import { Observable, of } from "rxjs";
 import { ProductActions } from "../../../@store/actions/product-actions";
+import { LIB } from "../../../@core/utils";
 
 @Component({
   selector: "ngx-menu",
@@ -44,15 +45,19 @@ export class MenuComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   isloaded = false;
   isClicked = false;
+  user: any;
+
   public constructor(
     private menuService: NbMenuService,
     private router: Router,
     private categoryService: CategoryService,
     private store: Store<AppState>,
-    private productAction: ProductActions
+    private productAction: ProductActions,
+    private lib: LIB
   ) {}
 
   ngOnInit(): void {
+    this.user = this.lib.user;
     this.store.select(IsLoadedCategory).subscribe((isLoaded) => {
       //if (!isLoaded) {
       if (this.menuItems === null || this.menuItems.length === 0) {
@@ -102,11 +107,16 @@ export class MenuComponent implements OnInit, OnDestroy {
             //   icon: "shield-outline",
             //   link: "/Quan-tri",
             // });
-            this.menuItems.push({
-              title: "Thống kê",
-              icon: "pie-chart-outline",
-              link: "/Thong-ke",
-            });
+            if (
+              this.user.Manhomquyen === "0001" ||
+              this.user.Manhomquyen === "0004" ||
+              this.user.Manhomquyen === "NU0001"
+            )
+              this.menuItems.push({
+                title: "Thống kê",
+                icon: "pie-chart-outline",
+                link: "/Thong-ke",
+              });
             this.store.dispatch(this.productAction.setIsloadedCategory(true));
             //}
           });

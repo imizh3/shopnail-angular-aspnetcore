@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,14 @@ namespace WEB2020
             services.AddDbContext<MARTContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            //set dung luong anh limit
+            services.Configure<FormOptions>(x =>
+            {
+                x.MultipartBodyLengthLimit = int.MaxValue;
+                x.ValueLengthLimit = int.MaxValue;
+                x.ValueCountLimit = int.MaxValue;
+                x.MemoryBufferThreshold = int.MaxValue;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

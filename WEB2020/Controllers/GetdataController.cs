@@ -6,6 +6,8 @@ using WEB2020.Model;
 using WEB2020.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace WEB2020.Controllers
 {
@@ -16,10 +18,30 @@ namespace WEB2020.Controllers
     {
 
         readonly ApplicationManage _manage;
+        readonly IWebHostEnvironment _hostEnvironment;
 
-        public GetdataController(ApplicationManage manage)
+        public GetdataController(ApplicationManage manage, IWebHostEnvironment host)
         {
             _manage = manage;
+            _hostEnvironment = host;
+        }
+
+        [HttpGet(Name = "getImages")]
+        public IActionResult getImages()
+        {
+
+            var rootDir = this._hostEnvironment.WebRootPath + "/images";
+
+            var filters = new string[] { ".jpg", ".jpeg", ".png" };
+
+            var baseUrl = "";
+            var imgUrls = Directory.EnumerateFiles(rootDir, "*.*", SearchOption.AllDirectories)
+            .Where(fileName => filters.Any(filter => fileName.EndsWith(filter)))
+            .Select(fileName => Path.GetRelativePath(rootDir, fileName))
+            .Select(fileName => Path.Combine(baseUrl, fileName))
+            .Select(fileName => fileName.Replace("\\", "/"))
+            ;
+            return new JsonResult(imgUrls);
         }
         [HttpGet(Name = "Dmptnx")]
         public IEnumerable<Dmptnx> dmptnx()

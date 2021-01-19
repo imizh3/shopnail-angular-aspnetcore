@@ -2,6 +2,7 @@ export class Nguoidung {
   madonvi: string;
   tendangnhap: string;
   hovaten: string;
+  manhomquyen: string;
   trangthai: number;
   matkhau: string;
   sodienthoai: string;

@@ -31,7 +31,7 @@ export class ThongKeComponent implements OnInit {
     this.baocaoRequest.trangThai = 10;
     this.baocaoRequest.tuNgay = this.tuNgayDate;
     this.baocaoRequest.denNgay = this.denNgayDate;
-    this.baocaoRequest.manhanvien = this.user.Manhanvien;
+    this.baocaoRequest.manhanvien = "";
     const $baocao = this.reportService.getBaocaoxuatbanbuonTH(
       this.baocaoRequest
     );
@@ -48,6 +48,7 @@ export class ThongKeComponent implements OnInit {
   btnLocClicked() {
     this.baocaoRequest.tuNgay = this.tuNgayDate;
     this.baocaoRequest.denNgay = this.denNgayDate;
+    this.baocaoRequest.manhanvien = "";
     const $baocao = this.reportService.getBaocaoxuatbanbuonTH(
       this.baocaoRequest
     );

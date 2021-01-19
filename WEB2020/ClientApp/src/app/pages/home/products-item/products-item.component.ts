@@ -1,30 +1,52 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
-import { NbGlobalPhysicalPosition, NbIconLibraries, NbToastrService } from '@nebular/theme';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../@store/app-state';
-import { CartActions } from '../../../@store/actions/cart-actions';
-import { Product } from '../../../@core/data/product';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
+import {
+  NbGlobalPhysicalPosition,
+  NbIconLibraries,
+  NbToastrService,
+} from "@nebular/theme";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../../@store/app-state";
+import { CartActions } from "../../../@store/actions/cart-actions";
+import { Product } from "../../../@core/data/product";
+import { DataService } from "../../../@core/mock/data.service";
+import { LIB } from "../../../@core/utils";
 
 @Component({
-  selector: 'ngx-products-item',
-  templateUrl: './products-item.component.html',
-  styleUrls: ['./products-item.component.scss'],
+  selector: "ngx-products-item",
+  templateUrl: "./products-item.component.html",
+  styleUrls: ["./products-item.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsItemComponent implements OnInit {
   @Input() product: Product;
   @Input() dienGiaiKhuyenMai: string;
+  baseUrl: string;
   soluong: number;
   sothung: number;
   sole: number;
-  constructor(iconsLibrary: NbIconLibraries,
+  imageUrls: any[];
+  constructor(
+    iconsLibrary: NbIconLibraries,
     private store: Store<AppState>,
     private actions: CartActions,
     private toastrService: NbToastrService,
+    private dataService: DataService,
+    private lib: LIB
   ) {
-    iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
+    iconsLibrary.registerFontPack("fa", {
+      packClass: "fa",
+      iconClassPrefix: "fa",
+    });
   }
   ngOnInit(): void {
+    this.baseUrl = this.lib.baseUrl + "images";
     this.soluong = 1;
   }
   tangSoluong() {
@@ -42,10 +64,14 @@ export class ProductsItemComponent implements OnInit {
     this.soluong = sothung * quycach + sole;
     if (this.soluong <= 0) {
       // alert('số lượng đặt hàng không hợp lệ!');
-      this.toastrService.show('số lượng đặt hàng không hợp lệ!', 'Không thêm được sản phẩm!', {
-        position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-        status: 'warning',
-      });
+      this.toastrService.show(
+        "số lượng đặt hàng không hợp lệ!",
+        "Không thêm được sản phẩm!",
+        {
+          position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+          status: "warning",
+        }
+      );
       return;
     }
     const giaodichct = {
@@ -63,10 +89,14 @@ export class ProductsItemComponent implements OnInit {
     this.soluong = sothung * quycach + sole;
     if (this.soluong <= 0) {
       // alert('số lượng đặt hàng không hợp lệ!');
-      this.toastrService.show('số lượng đặt hàng không hợp lệ!', 'Không thêm được sản phẩm!', {
-        position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-        status: 'warning',
-      });
+      this.toastrService.show(
+        "số lượng đặt hàng không hợp lệ!",
+        "Không thêm được sản phẩm!",
+        {
+          position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+          status: "warning",
+        }
+      );
       return;
     }
     const giaodichct = {
@@ -80,18 +110,21 @@ export class ProductsItemComponent implements OnInit {
   setValue(soluong: string) {
     // tslint:disable-next-line: radix
     this.sole = parseInt(soluong);
-
   }
 
   setValueThung(soluong: string) {
     // tslint:disable-next-line: radix
     this.sothung = parseInt(soluong);
-
   }
-  @ViewChild('soleid') btnAddToCart: ElementRef;
+  @ViewChild("soleid") btnAddToCart: ElementRef;
   sendTab(event) {
     if (event.keyCode === 13) {
       this.btnAddToCart.nativeElement.focus();
     }
+  }
+
+  getImage(fileName: string) {
+    this.imageUrls = this.dataService.imageUrls;
+    return this.imageUrls.find((d) => d.search(fileName) >= 0);
   }
 }
